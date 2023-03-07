@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Compose{% endblock %}
+
+{% block body %}
+    <h1>Edit Compose</h1>
+
+    {{ include('compose/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_compose_index') }}">back to list</a>
+
+    {{ include('compose/_delete_form.html.twig') }}
+{% endblock %}

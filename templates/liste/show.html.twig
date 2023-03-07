@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste{% endblock %}
+
+{% block body %}
+    <h1>Liste</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ liste.id }}</td>
+            </tr>
+            <tr>
+                <th>NomListe</th>
+                <td>{{ liste.nomListe }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ liste.dateCreation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_liste_index') }}">back to list</a>
+
+    <a href="{{ path('app_liste_edit', {'id': liste.id}) }}">edit</a>
+
+    {{ include('liste/_delete_form.html.twig') }}
+{% endblock %}

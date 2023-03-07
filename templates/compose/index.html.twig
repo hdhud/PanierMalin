@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compose index{% endblock %}
+
+{% block body %}
+    <h1>Compose index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantite</th>
+                <th>EstMarque</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compose in composes %}
+            <tr>
+                <td>{{ compose.id }}</td>
+                <td>{{ compose.quantite }}</td>
+                <td>{{ compose.estMarque ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_compose_show', {'id': compose.id}) }}">show</a>
+                    <a href="{{ path('app_compose_edit', {'id': compose.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_compose_new') }}">Create new</a>
+{% endblock %}
