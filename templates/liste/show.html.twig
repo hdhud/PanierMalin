@@ -19,6 +19,16 @@
                 <th>DateCreation</th>
                 <td>{{ liste.dateCreation }}</td>
             </tr>
+            <tr>
+                <th>Articles</th>
+                <td>
+                {% for article in liste.composes %}
+                {{ article.quantite }}
+                {{ article.idArticle.nomArticle }} {{ article.quantite * article.idArticle.prix }} <br>
+                {% endfor %}
+                <td>
+            </tr>
+
         </tbody>
     </table>
 
