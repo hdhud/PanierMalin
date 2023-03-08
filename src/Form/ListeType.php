@@ -13,8 +13,6 @@ class ListeType extends AbstractType
     {
         $builder
             ->add('nomListe')
-            ->add('dateCreation')
-            ->add('creePar')
         ;
     }
 

@@ -11,4 +11,11 @@
 <div class="example-wrapper">
     <h1>Qui est là ?</h1>
 </div>
+<div>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">{{button_label|default("Qui est là ?")}}</button>
+    {{ form_end(form) }}
+</div>
+
 {% endblock %}

@@ -9,22 +9,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\UtilisateurRepository;
 
 #[Route('/liste')]
 class ListeController extends AbstractController
 {
     #[Route('/', name: 'app_liste_index', methods: ['GET'])]
-    public function index(ListeRepository $listeRepository): Response
+    public function index(ListeRepository $listeRepository,UtilisateurRepository $utilisateurRepository ,SessionInterface $session): Response
     {
+        $session->get('pseudo');
         return $this->render('liste/index.html.twig', [
-            'listes' => $listeRepository->findAll(),
+            'listes' => $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')])->getListes(),
         ]);
     }
 
     #[Route('/new', name: 'app_liste_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ListeRepository $listeRepository): Response
+    public function new(Request $request,UtilisateurRepository $utilisateurRepository, ListeRepository $listeRepository, SessionInterface $session): Response
     {
         $liste = new Liste();
+        $liste->addCreePar($utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')]));
+        $liste->setDateCreation((new \DateTime())->format("Y-m-d H:i:s"));
         $form = $this->createForm(ListeType::class, $liste);
         $form->handleRequest($request);
 

@@ -13,7 +13,6 @@ class UtilisateurType extends AbstractType
     {
         $builder
             ->add('pseudo')
-            ->add('listes')
         ;
     }
 
