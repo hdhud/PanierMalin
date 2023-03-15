@@ -35,9 +35,9 @@ class ListeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $listeRepository->save($liste, true);
-            $session->set("liste",$liste->getNom());
+            $session->set("liste",$liste->getNomListe());
 
-            return $this->redirectToRoute('app_articlesLi', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_listeArticles', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('liste/new.html.twig', [
