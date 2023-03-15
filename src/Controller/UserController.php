@@ -28,19 +28,29 @@ class UserController extends AbstractController
     #[Route('/liste', name: 'app_user_liste')]
     public function liste(UtilisateurRepository $utilisateurRepository, SessionInterface $session): Response
     {
+        $listes = $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')])->getListes();
         return $this->render('user/liste.html.twig', [
             'controller_name' => 'UserController',
-            'listes' => $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')])->getListes(),
+            'listes' => $listes,
         ]);
     }
 
     #[Route('/liste/{id}', name: 'app_user_liste_id')]
-    public function listeID(): Response
+    public function listeID(Liste $liste, SessionInterface $session): Response
     {
-        return $this->render('user/liste.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        $userCreeListe = $liste->getCreePar()->first(); // récupère le premier utilisateur qui a créé la liste
+        $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
+    
+        if ($userCreeListe && $userCreeListe->getPseudo() === $currentUserPseudo) {
+            return $this->render('user/show_liste.html.twig', [
+                'controller_name' => 'UserController',
+                'liste' => $liste,
+            ]);
+        } else {
+            return $this->redirectToRoute('app_user_liste');
+        }
     }
+    
 
     #[Route('/new-liste', name: 'app_user_liste_new', methods: ['GET', 'POST'])]
     public function new(Request $request,UtilisateurRepository $utilisateurRepository, ListeRepository $listeRepository, SessionInterface $session): Response

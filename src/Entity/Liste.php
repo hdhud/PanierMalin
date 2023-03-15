@@ -62,6 +62,46 @@ class Liste
         return $this;
     }
 
+    public function getPrix(): ?float
+    {
+        $prix = 0;
+        foreach ($this->composes as $compose) {
+            $prix += $compose->getPrix();
+        }
+        return $prix;
+    }
+
+    public function getPrixMax(): ?float
+    {
+        $prix = 0;
+        foreach ($this->composes as $compose) {
+            if ($compose->getPrix() > $prix) {
+                $prix = $compose->getPrix();
+            }
+        }
+        return $prix;
+    }
+
+    public function getPrixMin(): ?float
+    {
+        $prix = $this->getPrixMax();
+        foreach ($this->composes as $compose) {
+            if ($compose->getPrix() < $prix) {
+                $prix = $compose->getPrix();
+            }
+        }
+        return $prix;
+    }
+
+    public function getPrixMoyen(): ?float
+    {
+        $prix = 0;
+        foreach ($this->composes as $compose) {
+            $prix += $compose->getPrix();
+        }
+        return $prix / count($this->composes);
+    }
+
     /**
      * @return Collection<int, Utilisateur>
      */
