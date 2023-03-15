@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\ListeRepository;
 use App\Entity\Liste;
 use App\Form\ListeType;
+use App\Repository\ArticleRepository;
+use App\Entity\Article;
+use App\Form\ArticleType;
+
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -37,7 +41,7 @@ class UserController extends AbstractController
     #[Route('/liste/{id}', name: 'app_user_liste_id')]
     public function listeID(): Response
     {
-        return $this->render('user/liste.html.twig', [
+        return $this->render('user/show_liste.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
@@ -55,7 +59,7 @@ class UserController extends AbstractController
             $listeRepository->save($liste, true);
             $session->set("liste",$liste->getNomListe());
 
-            return $this->redirectToRoute('app_user_listeArticles', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_liste_articles', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/new_liste.html.twig', [
@@ -64,11 +68,15 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/liste-articles', name: 'app_user_listeArticles')]
-    public function listeArticles(): Response
+    #[Route('/liste-articles', name: 'app_user_liste_articles')]
+    public function listeArticles(SessionInterface $session, ArticleRepository $articleRepository): Response
     {
-        return $this->render('user/liste.html.twig', [
-            'controller_name' => 'UserController',
+        $liste = $session->get("liste");
+        $articles = $articleRepository->findAll();
+        return $this->render('user/liste_articles.html.twig', [
+            'controller_name' => 'UserController', 
+            "liste" => $liste,
+            "articles" => $articles,
         ]);
     }
 }
