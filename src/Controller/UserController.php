@@ -26,10 +26,11 @@ class UserController extends AbstractController
     }
 
     #[Route('/liste', name: 'app_user_liste')]
-    public function liste(): Response
+    public function liste(UtilisateurRepository $utilisateurRepository, SessionInterface $session): Response
     {
         return $this->render('user/liste.html.twig', [
             'controller_name' => 'UserController',
+            'listes' => $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')])->getListes(),
         ]);
     }
 
@@ -41,7 +42,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/liste/new', name: 'app_user_liste_new', methods: ['GET', 'POST'])]
+    #[Route('/new-liste', name: 'app_user_liste_new', methods: ['GET', 'POST'])]
     public function new(Request $request,UtilisateurRepository $utilisateurRepository, ListeRepository $listeRepository, SessionInterface $session): Response
     {
         $liste = new Liste();
@@ -63,7 +64,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/listeArticles', name: 'app_user_listeArticles')]
+    #[Route('/liste-articles', name: 'app_user_listeArticles')]
     public function listeArticles(): Response
     {
         return $this->render('user/liste.html.twig', [
