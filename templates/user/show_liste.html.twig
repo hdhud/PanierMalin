@@ -27,6 +27,7 @@
         <div>
             <h2>Ajouter un article</h2>
 
+<<<<<<< HEAD
             {{ form_start(form) }}
                 {{ form_row(form.idListe) }}
                 {{ form_row(form.idArticle) }}
@@ -35,6 +36,19 @@
                 <button type="submit">{{button_label|default("Ajouter à la liste")}}</button>
             {{ form_widget(form) }}
         </div>
+=======
+        </tbody>
+    </table>
+    <div>
+        <h2>Ajouter un article</h2>
+
+        {{ form_start(form) }}
+            {{ form_row(form.idArticle) }}
+            {{ form_row(form.quantite) }}
+            {{ form_row(form.estMarque) }}
+            <button type="submit">{{button_label|default("Ajouter à la liste")}}</button>
+        {{ form_widget(form) }}
+>>>>>>> f5aa423a6f95ccbf9fbfe1d0f6893e3736c5bae9
     </div>
     <a href="{{ path('app_user_liste') }}">back to list</a>
 
