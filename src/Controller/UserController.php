@@ -19,6 +19,7 @@ use App\Entity\Compose;
 use App\Form\ArticleType;
 use App\Form\ComposeType;
 use App\Repository\ComposeRepository;
+use App\Form\AddArticleType;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -48,10 +49,11 @@ class UserController extends AbstractController
         $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
 
         $compose = new Compose();
-        $form = $this->createForm(ComposeType::class, $compose);
+        $form = $this->createForm(AddArticleType::class, $compose);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $compose->setIdListe($liste);
             $composeRepository->save($compose, true);
         }
     
