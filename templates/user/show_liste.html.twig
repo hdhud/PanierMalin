@@ -4,48 +4,39 @@
 
 {% block body %}
     <h1>Liste</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ liste.id }}</td>
-            </tr>
-            <tr>
-                <th>NomListe</th>
-                <td>{{ liste.nomListe }}</td>
-            </tr>
-            <tr>
-                <th>DateCreation</th>
-                <td>{{ liste.dateCreation }}</td>
-            </tr>
-            <tr>
-                <th>Articles</th>
-                <td>
+    <div class="pageshowlist">
+        <div class="infoliste">
+            <div class="nomliste">
+                <div>NomListe</div>
+                <div>{{ liste.nomListe }}</div>
+            </div>
+            <div class="dateCreationliste">
+                <div>DateCreation</div>
+                <div>{{ liste.dateCreation }}</div>
+            </div>
+        </div>
+         <div>
+            <div>Articles</div>
+            <div>
                 {% for article in liste.composes %}
                 {{ article.quantite }}
                 {{ article.idArticle.nomArticle }} {{ article.quantite * article.idArticle.prix }} <br>
                 {% endfor %}
-                <td>
-            </tr>
+            <div>
+        </div>
+        <div>
+            <h2>Ajouter un article</h2>
 
-        </tbody>
-    </table>
-    <div>
-        <h2>Ajouter un article</h2>
-
-        {{ form_start(form) }}
-            {{ form_row(form.idListe) }}
-            {{ form_row(form.idArticle) }}
-            {{ form_row(form.quantite) }}
-            {{ form_row(form.estMarque) }}
-            <button type="submit">{{button_label|default("Ajouter à la liste")}}</button>
-        {{ form_widget(form) }}
+            {{ form_start(form) }}
+                {{ form_row(form.idListe) }}
+                {{ form_row(form.idArticle) }}
+                {{ form_row(form.quantite) }}
+                {{ form_row(form.estMarque) }}
+                <button type="submit">{{button_label|default("Ajouter à la liste")}}</button>
+            {{ form_widget(form) }}
+        </div>
     </div>
-
     <a href="{{ path('app_user_liste') }}">back to list</a>
-
-    <a href="{{ path('app_liste_edit', {'id': liste.id}) }}">edit</a>
 
     {{ include('liste/_delete_form.html.twig') }}
 {% endblock %}
