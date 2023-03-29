@@ -11,6 +11,7 @@ body {
 }
 
 .navigation-bar {
+    height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,4 +25,23 @@ body {
     color: white;
     text-decoration: none;
     
+}
+
+.form-pseudo {
+    
+    height: 40px;
+    width: 150px;
+    border : 2px solid #333;
+    background-color: lightgray;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-75px, -50%);
+}
+input::placeholder {
+    text-align: center;
+}
+.hidden{
+    display: none;
+    opacity: 0;
 }

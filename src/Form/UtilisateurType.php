@@ -12,7 +12,12 @@ class UtilisateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pseudo')
+            ->add('pseudo', null, [
+                'label' => 'Pseudo',
+                'attr' => [
+                    'placeholder' => 'Qui est là ?',
+                ],
+            ])
         ;
     }
 
