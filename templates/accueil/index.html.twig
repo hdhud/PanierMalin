@@ -8,16 +8,16 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1 class="hidden">Qui est là ?</h1>
-</div>
 <div>
 <div class="barnoir">
 </div>
-    {{ form_start(form) }}
-    {{ form_widget(form.pseudo, {'attr':{'class':'form-pseudo'}}) }}
-    <button type="submit" class="hidden">{{button_label|default("Qui est là ?")}}</button>
-    {{ form_end(form) }}
+    <div id="formDebut">
+        <div id="ligneDebut"></div>
+        {{ form_start(form) }}
+        {{ form_widget(form.pseudo, {'attr':{'class':'form-pseudo'}}) }}
+        <button type="submit" class="hidden">{{button_label|default("Qui est là ?")}}</button>
+        {{ form_end(form) }}
+    </div>
 </div>
 
 {% endblock %}

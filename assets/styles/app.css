@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/helvetica-neue-9');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,8 +7,13 @@
     list-style: none;
 }
 
+h1{
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    font-size: 3rem;
+}
+
 body {
-    background-color: lightgray;
+    background-color: rgb(255, 255, 255);
 }
 
 .navigation-bar {
@@ -15,7 +22,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: #000000;
     color: white;
     padding: 0 1rem;
 }
@@ -27,20 +34,45 @@ body {
 }
 
 .form-pseudo {
-    
-    height: 40px;
-    width: 150px;
-    border : 2px solid #333;
-    background-color: lightgray;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-75px, -50%);
+    height: 10vh;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    width:30vw;
+    background-color: rgb(255, 255, 255);
+    font-size: 3vw;
+    text-align: center;
+    border: 3px solid black;
 }
+
 input::placeholder {
     text-align: center;
+    font-style: italic;
 }
 .hidden{
     display: none;
     opacity: 0;
+}
+
+#formDebut{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+}
+
+#ligneDebut {
+    width: 0;
+    height:10rem;
+    border: 2px solid black;
+}
+
+#statsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    border-right: 3px black solid;
+    border-top: none;
+    height: 5rem;
+    flex-direction: column;
 }
