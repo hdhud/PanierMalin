@@ -27,12 +27,18 @@ class Article
     #[ORM\OneToMany(mappedBy: 'idArticle', targetEntity: Compose::class)]
     private Collection $composes;
 
+    
     public function __construct()
     {
         $this->type = new ArrayCollection();
         $this->composes = new ArrayCollection();
     }
-
+    
+    public function __toString()
+    {
+        return $this->nomArticle;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

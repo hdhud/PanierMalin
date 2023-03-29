@@ -15,8 +15,11 @@ use App\Entity\Liste;
 use App\Form\ListeType;
 use App\Repository\ArticleRepository;
 use App\Entity\Article;
+use App\Entity\Compose;
 use App\Form\ArticleType;
-
+use App\Form\ComposeType;
+use App\Repository\ComposeRepository;
+use App\Form\AddArticleType;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -53,16 +56,33 @@ class UserController extends AbstractController
     }
 
     #[Route('/liste/{id}', name: 'app_user_liste_id')]
-    public function listeID(Liste $liste, SessionInterface $session): Response
+    public function listeID(Liste $liste, SessionInterface $session, Request $request, ComposeRepository $composeRepository): Response
     {
         $userCreeListe = $liste->getCreePar()->first(); // récupère le premier utilisateur qui a créé la liste
+<<<<<<< HEAD
         $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté)
+=======
+        $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
+
+        $compose = new Compose();
+        $form = $this->createForm(AddArticleType::class, $compose);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $compose->setIdListe($liste);
+            $composeRepository->save($compose, true);
+        }
+>>>>>>> 1552273ef2f8f5a9aa5c932d6ac120fd636f82ee
     
         if ($userCreeListe && $userCreeListe->getPseudo() === $currentUserPseudo) {
             return $this->render('user/show_liste.html.twig', [
                 'controller_name' => 'UserController',
                 'liste' => $liste,
+<<<<<<< HEAD
                 'pseudo' => $session->get('pseudo'),
+=======
+                'form' => $form->createView(),
+>>>>>>> 1552273ef2f8f5a9aa5c932d6ac120fd636f82ee
             ]);
         } else {
             return $this->redirectToRoute('app_user_liste');
@@ -92,15 +112,25 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/liste-articles', name: 'app_user_liste_articles')]
-    public function listeArticles(SessionInterface $session, ArticleRepository $articleRepository): Response
+    #[Route('/liste-articles', name: 'app_user_liste_articles', methods: ['GET', 'POST'])]
+    public function listeArticles(SessionInterface $session, ArticleRepository $articleRepository, Request $request, ComposeRepository $composeRepository): Response
     {
         $liste = $session->get("liste");
         $articles = $articleRepository->findAll();
+
+        $compose = new Compose();
+        $form = $this->createForm(ComposeType::class, $compose);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $composeRepository->save($compose, true);
+        }
+
         return $this->render('user/liste_articles.html.twig', [
             'controller_name' => 'UserController', 
             "liste" => $liste,
             "articles" => $articles,
+            "form" => $form->createView(),
         ]);
     }
 }

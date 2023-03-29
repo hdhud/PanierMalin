@@ -2,29 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Liste;
+use App\Entity\Compose;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ListeType extends AbstractType
+class AddArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomListe', null, [
-                'label' => 'nomListe',
-                'attr' => [
-                    'placeholder' => 'Nom de la liste ?',
-                ],
-            ])
+            ->add('quantite')
+            ->add('estMarque')
+            ->add('idArticle')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Liste::class,
+            'data_class' => Compose::class,
         ]);
     }
 }
