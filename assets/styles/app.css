@@ -33,7 +33,7 @@ body {
     
 }
 
-.form-pseudo {
+.form-pseudo,.form-liste {
     height: 10vh;
     font-family: 'Helvetica 55 Roman', sans-serif;
     width:30vw;
@@ -75,4 +75,33 @@ input::placeholder {
     border-top: none;
     height: 5rem;
     flex-direction: column;
+}
+#formcreateliste{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+}
+#backliste
+{
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: center;
+    height: calc(90vh - 100px - 10rem - 12px);
+}
+.backliste{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 3vh;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    width:10vw;
+    background-color: rgb(255, 255, 255);
+    font-size: 1vw;
+    text-align: center;
+    border: 3px solid black;
 }

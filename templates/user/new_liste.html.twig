@@ -3,9 +3,12 @@
 {% block title %}New Liste{% endblock %}
 
 {% block body %}
-    <h1>Create new Liste</h1>
+<div id="formcreateliste">
+    <div id="ligneDebut"></div>
 
     {{ include('liste/_form.html.twig') }}
-
-    <a href="{{ path('app_user_liste') }}">back to list</a>
+</div>
+<div id="backliste">
+    <a href="{{ path('app_user_liste') }}" class="backliste">back to list</a>
+</div>
 {% endblock %}
