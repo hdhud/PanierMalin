@@ -5,50 +5,37 @@
 {% block body %}
     <h1>Liste</h1>
     <div class="pageshowlist">
-        <div class="infoliste">
-            <div class="nomliste">
-                <div>NomListe</div>
-                <div>{{ liste.nomListe }}</div>
+        <div class="liste">
+            <div class="infoliste">
+                <div class="nomliste">
+                    <div>NomListe</div>
+                    <div>{{ liste.nomListe }}</div>
+                </div>
+                <div class="dateCreationliste">
+                    <div>DateCreation</div>
+                    <div>{{ liste.dateCreation }}</div>
+                </div>
             </div>
-            <div class="dateCreationliste">
-                <div>DateCreation</div>
-                <div>{{ liste.dateCreation }}</div>
+            <div>
+                <div>Articles</div>
+                <div>
+                    {% for article in liste.composes %}
+                    {{ article.quantite }}
+                    {{ article.idArticle.nomArticle }} {{ article.quantite * article.idArticle.prix }} <br>
+                    {% endfor %}
+                <div>
             </div>
-        </div>
-         <div>
-            <div>Articles</div>
-            <div>
-                {% for article in liste.composes %}
-                {{ article.quantite }}
-                {{ article.idArticle.nomArticle }} {{ article.quantite * article.idArticle.prix }} <br>
-                {% endfor %}
-            <div>
         </div>
         <div>
             <h2>Ajouter un article</h2>
 
-<<<<<<< HEAD
             {{ form_start(form) }}
-                {{ form_row(form.idListe) }}
                 {{ form_row(form.idArticle) }}
                 {{ form_row(form.quantite) }}
                 {{ form_row(form.estMarque) }}
                 <button type="submit">{{button_label|default("Ajouter à la liste")}}</button>
             {{ form_widget(form) }}
         </div>
-=======
-        </tbody>
-    </table>
-    <div>
-        <h2>Ajouter un article</h2>
-
-        {{ form_start(form) }}
-            {{ form_row(form.idArticle) }}
-            {{ form_row(form.quantite) }}
-            {{ form_row(form.estMarque) }}
-            <button type="submit">{{button_label|default("Ajouter à la liste")}}</button>
-        {{ form_widget(form) }}
->>>>>>> f5aa423a6f95ccbf9fbfe1d0f6893e3736c5bae9
     </div>
     <a href="{{ path('app_user_liste') }}">back to list</a>
 
