@@ -76,7 +76,6 @@ input::placeholder {
     height: 6rem;
     flex-direction: column;
 }
-<<<<<<< HEAD
 
 #plusBouton{
     background-color: black;
@@ -201,7 +200,8 @@ input::placeholder {
     width: calc(50vw - 6.99rem);
     background-color: #000000;
     height: 0.15rem;
-=======
+
+}
 #formcreateliste{
     display: flex;
     justify-content: center;
@@ -256,5 +256,4 @@ input::placeholder {
     text-align: center;
     color: white;
 
->>>>>>> 1552273ef2f8f5a9aa5c932d6ac120fd636f82ee
 }

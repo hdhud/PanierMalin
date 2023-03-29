@@ -59,9 +59,6 @@ class UserController extends AbstractController
     public function listeID(Liste $liste, SessionInterface $session, Request $request, ComposeRepository $composeRepository): Response
     {
         $userCreeListe = $liste->getCreePar()->first(); // récupère le premier utilisateur qui a créé la liste
-<<<<<<< HEAD
-        $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté)
-=======
         $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
 
         $compose = new Compose();
@@ -72,17 +69,13 @@ class UserController extends AbstractController
             $compose->setIdListe($liste);
             $composeRepository->save($compose, true);
         }
->>>>>>> 1552273ef2f8f5a9aa5c932d6ac120fd636f82ee
     
         if ($userCreeListe && $userCreeListe->getPseudo() === $currentUserPseudo) {
             return $this->render('user/show_liste.html.twig', [
                 'controller_name' => 'UserController',
                 'liste' => $liste,
-<<<<<<< HEAD
                 'pseudo' => $session->get('pseudo'),
-=======
                 'form' => $form->createView(),
->>>>>>> 1552273ef2f8f5a9aa5c932d6ac120fd636f82ee
             ]);
         } else {
             return $this->redirectToRoute('app_user_liste');
