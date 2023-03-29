@@ -33,9 +33,22 @@ class UserController extends AbstractController
     public function liste(UtilisateurRepository $utilisateurRepository, SessionInterface $session): Response
     {
         $listes = $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')])->getListes();
+        $listesDates = [];
+        $derniereListe = $listes[0];
+        for($i = 0; $i < count($listes); $i++){
+            if ($listes[$i]->getDateCreation() > $derniereListe->getDateCreation()){
+                $derniereListe = $listes[$i];
+
+            }
+        }
+
         return $this->render('user/liste.html.twig', [
             'controller_name' => 'UserController',
             'listes' => $listes,
+            'pseudo' => $session->get('pseudo'),
+            'derniereListe' => $derniereListe,
+            'derniereListeId' => $derniereListe->getId(),
+            'listeDatesMieux' => $listesDates,
         ]);
     }
 
@@ -43,12 +56,13 @@ class UserController extends AbstractController
     public function listeID(Liste $liste, SessionInterface $session): Response
     {
         $userCreeListe = $liste->getCreePar()->first(); // récupère le premier utilisateur qui a créé la liste
-        $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
+        $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté)
     
         if ($userCreeListe && $userCreeListe->getPseudo() === $currentUserPseudo) {
             return $this->render('user/show_liste.html.twig', [
                 'controller_name' => 'UserController',
                 'liste' => $liste,
+                'pseudo' => $session->get('pseudo'),
             ]);
         } else {
             return $this->redirectToRoute('app_user_liste');

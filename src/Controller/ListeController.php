@@ -79,6 +79,6 @@ class ListeController extends AbstractController
             $listeRepository->remove($liste, true);
         }
 
-        return $this->redirectToRoute('app_liste_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_user_liste', [], Response::HTTP_SEE_OTHER);
     }
 }
