@@ -79,4 +79,10 @@ class Compose
 
         return $this;
     }
+
+    // Get the price of the article
+    public function getPrix(): ?float
+    {
+        return $this->idArticle->getPrix();
+    }
 }

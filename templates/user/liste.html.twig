@@ -25,6 +25,7 @@
                     <a href="{{ path('app_user_liste_id', {'id': liste.id}) }}">show</a>
                     <a href="{{ path('app_liste_edit', {'id': liste.id}) }}">edit</a>
                 </td>
+                <span>{{ liste.getPrixMin() }}</span>
             </tr>
         {% else %}
             <tr>

@@ -15,12 +15,15 @@
             <datalist id="platsLi">
 
                 {% for article in articles %}
-                    <option value="{{ article.getNomArticle }}">
+                    <option value="{{ article.getNomArticle }}" prix="{{ article.getPrix }}">
                         {{ article.getNomArticle }}
                     </option>
                 {% endfor %}
 
             </datalist>
+        
+        <p id="totalListe"> Total de la liste : <span id="totalNum">0<span>€</p>
+
             <button type="button" id="btnAjout">Ajouter</button>
         </div>
 
