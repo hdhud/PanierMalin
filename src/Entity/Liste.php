@@ -33,6 +33,11 @@ class Liste
         $this->composes = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->nomListe;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
