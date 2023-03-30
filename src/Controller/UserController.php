@@ -56,32 +56,38 @@ class UserController extends AbstractController
     }
 
     #[Route('/liste/{id}', name: 'app_user_liste_id')]
-    public function listeID(Liste $liste, SessionInterface $session, Request $request, ComposeRepository $composeRepository): Response
+    public function listeID(Liste $liste, SessionInterface $session): Response
     {
+        // A CHANGER ET ENLEVER LE FIRST
         $userCreeListe = $liste->getCreePar()->first(); // récupère le premier utilisateur qui a créé la liste
         $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
 
-        $compose = new Compose();
-        $form = $this->createForm(AddArticleType::class, $compose);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $compose->setIdListe($liste);
-            $composeRepository->save($compose, true);
-        }
-    
         if ($userCreeListe && $userCreeListe->getPseudo() === $currentUserPseudo) {
             return $this->render('user/show_liste.html.twig', [
                 'controller_name' => 'UserController',
                 'liste' => $liste,
-                'pseudo' => $session->get('pseudo'),
-                'form' => $form->createView(),
             ]);
         } else {
             return $this->redirectToRoute('app_user_liste');
         }
     }
     
+    #[Route('/liste/{id}/collaborer', name: 'app_user_liste_id_collaborer', methods: ['GET', 'POST'])]
+    public function listeIDCollaborer(UtilisateurRepository $utilisateurRepository, ListeRepository $listeRepository, Liste $liste, Request $request): Response
+    {
+        $pseudo = $request->get('pseudo');
+        dump($pseudo);
+
+        $user = $utilisateurRepository->findOneBy(['pseudo' => $pseudo]);
+
+        $liste->addCreePar($user);
+     
+        $listeRepository->save($liste, true);
+        
+        return $this->redirectToRoute('app_user_liste_id',
+            ['id' => $liste->getId()],
+            Response::HTTP_SEE_OTHER);
+    }
 
     #[Route('/new-liste', name: 'app_user_liste_new', methods: ['GET', 'POST'])]
     public function new(Request $request,UtilisateurRepository $utilisateurRepository, ListeRepository $listeRepository, SessionInterface $session): Response
@@ -96,7 +102,9 @@ class UserController extends AbstractController
             $listeRepository->save($liste, true);
             $session->set("liste",$liste->getNomListe());
 
-            return $this->redirectToRoute('app_user_liste_articles', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_liste_articles', [
+                'liste' => $liste,
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/new_liste.html.twig', [
@@ -106,16 +114,18 @@ class UserController extends AbstractController
     }
 
     #[Route('/liste-articles', name: 'app_user_liste_articles', methods: ['GET', 'POST'])]
-    public function listeArticles(SessionInterface $session, ArticleRepository $articleRepository, Request $request, ComposeRepository $composeRepository): Response
+    public function listeArticles(ListeRepository $listeRepository,SessionInterface $session, ArticleRepository $articleRepository, Request $request, ComposeRepository $composeRepository): Response
     {
         $liste = $session->get("liste");
         $articles = $articleRepository->findAll();
+        $liste = $listeRepository->findOneBy(['nomListe' => $liste]);
 
         $compose = new Compose();
-        $form = $this->createForm(ComposeType::class, $compose);
+        $form = $this->createForm(AddArticleType::class, $compose);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $compose->setIdListe($liste);
             $composeRepository->save($compose, true);
         }
 

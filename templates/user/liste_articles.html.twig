@@ -6,11 +6,18 @@
     <h1>Create new Liste</h1>
     
         <td>{{ liste }}</td>
-        <ul id="allIng"> 
-        </ul>
+        <div>
+            <div>Articles</div>
+            <div>
+                {% for article in liste.composes %}
+                    {{ article.quantite }}
+                    {{ article.idArticle.nomArticle }}
+                <br>
+                {% endfor %}
+            <div>
+        </div>
         <div class="container_recherche" id="container_recherche">
             {{ form_start(form) }}
-                {{ form_row(form.idListe) }}
                 {{ form_row(form.idArticle) }}
                 {{ form_row(form.quantite) }}
                 {{ form_row(form.estMarque) }}

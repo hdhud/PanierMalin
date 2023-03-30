@@ -4,6 +4,22 @@
 
 {% block body %}
     <h1>Liste</h1>
+    <div>
+        <div>Collaborateurs</div>
+        <div>
+            {# {% for collaborateur in liste.collaborateurs %}
+                {{ collaborateur.idUser.pseudo }}
+                <br>
+            {% endfor %} #}
+        </div>
+        <span>Ajouter un collaborateur</span>
+        <div>
+            <form action="{{ path('app_user_liste_id_collaborer', {'id': liste.id}) }}" method="get">
+                <input type="text" name="pseudo" placeholder="Pseudo">
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </div>
     <div class="pageshowlist">
         <div class="liste">
             <div class="infoliste">
