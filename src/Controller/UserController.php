@@ -35,23 +35,16 @@ class UserController extends AbstractController
     #[Route('/liste', name: 'app_user_liste')]
     public function liste(UtilisateurRepository $utilisateurRepository, SessionInterface $session): Response
     {
-        $listes = $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')])->getListes();
-        $listesDates = [];
+        $listes = $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')])->getListesOrderByMostRecent();
+        $listeSansPremier = $listes->slice(1);
         $derniereListe = $listes[0];
-        for($i = 0; $i < count($listes); $i++){
-            if ($listes[$i]->getDateCreation() > $derniereListe->getDateCreation()){
-                $derniereListe = $listes[$i];
-
-            }
-        }
 
         return $this->render('user/liste.html.twig', [
             'controller_name' => 'UserController',
-            'listes' => $listes,
+            'listes' => $listeSansPremier,
             'pseudo' => $session->get('pseudo'),
             'derniereListe' => $derniereListe,
             'derniereListeId' => $derniereListe->getId(),
-            'listeDatesMieux' => $listesDates,
         ]);
     }
 

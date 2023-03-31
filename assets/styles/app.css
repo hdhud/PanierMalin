@@ -257,3 +257,145 @@ input::placeholder {
     color: white;
 
 }
+
+#addArticleContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 24rem;
+    border: 3px solid black;
+}
+
+#addArticleContainer h2{
+    background-color: black;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    color: white;
+    text-align: center;
+    font-size:30px;
+    padding: 0 0 3px 0;
+}
+
+#containsAll{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container_recherche form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#container_recherche>form>div{
+    display: flex;
+    width: 22rem;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    justify-content: space-between;
+    padding: 7px;
+    align-items: center;
+    font-weight: bolder;
+}
+
+#add_article_quantite{
+    border: 3px solid black;
+    height: 2.5rem;
+    font-size: 20px;
+    width: 15rem;
+    text-align: right;
+}
+
+#container_recherche>form>div>select{
+    border: 3px solid black;
+    height: 2.5rem;
+    font-size: 20px;
+    width: 15.3rem;
+    padding-right:5px;
+    text-align: right;
+}
+
+#container_recherche>form>div>label{
+    font-size: 20px;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+
+}
+
+#container_recherche>form>button{
+    border: 3px solid black;
+    height: 2.5rem;
+    font-size: 20px;
+    width: 10rem;
+    background-color: white;
+    color: black;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    font-weight: bolder;
+    margin-top: 10px;
+    transition: 0.3s ease;
+}
+
+#container_recherche>form>button:hover{
+    background-color: black;
+    color: white;
+    transition: 0.3s ease;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+#add_article_estMarque{
+    width:3rem;
+    height:3rem;
+}
+
+#add_article_estMarque:hover{
+    cursor: pointer;
+}
+
+#add_article_estMarque:checked{
+    accent-color: black;
+}
+
+.retourBouton{
+    height:4.1rem;
+    width:4.1rem;
+    background-color: black;
+    margin-right:20px;
+    caret-color: transparent;
+    transition : 0.3s ease;
+}
+
+.retourBouton:hover{
+    transform: scale(1.2);
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.retourBouton #horizontal{
+    background-color: rgb(255, 255, 255);
+    position:relative;
+    top: 1.1rem;
+    left: 0.85rem;
+    width: 2.3rem;
+    height: 0.7rem;
+}
+
+.retourBouton #diagHaut {
+    background-color: rgb(255, 255, 255);
+    position:relative;
+    top: 1.35rem;
+    left: 0.9rem;
+    width: 1.3rem;
+    height: 0.7rem;
+    transform: rotate(-35deg);
+}
+
+.retourBouton #diagBas {
+    background-color: rgb(255, 255, 255);
+    position:relative;
+    top: 0.85rem;
+    left: 0.9rem;
+    width: 1.3rem;
+    height: 0.7rem;
+    transform: rotate(35deg);
+}
