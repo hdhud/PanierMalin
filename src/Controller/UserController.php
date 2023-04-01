@@ -59,6 +59,7 @@ class UserController extends AbstractController
             return $this->render('user/show_liste.html.twig', [
                 'controller_name' => 'UserController',
                 'liste' => $liste,
+                'createur' => $userCreeListe,
             ]);
         } else {
             return $this->redirectToRoute('app_user_liste');

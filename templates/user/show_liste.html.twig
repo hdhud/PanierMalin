@@ -3,25 +3,42 @@
 {% block title %}Liste{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_user_liste') }}" class="back">◄</a>
     <div class="pageshowlist">
         <div class="liste">
-            <div class="infoliste">
-                <div class="nomliste">
-                    <div>NomListe : {{ liste.nomListe }}</div>
+                <div class="ligne2liste">
+                <div class="retourBouton">
+                    <a href="{{ path('app_user_liste') }}">
+                        <div id="diagHaut"></div>
+                        <div id="horizontal"></div>
+                        <div id="diagBas"></div>
+                    </a>
                 </div>
-                <div class="dateCreationliste">
-                    <div>Date : {{ liste.dateCreation }}</div>
+                <div class="infosLigne">
+                    <h1 class="h1Ligne">{{liste.nomListe}}</h1>
+                </div>
+                <br/>
+                <div class="moinsBouton">
+                <form method="post" action="{{ path('app_liste_delete', {'id': liste.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ liste.id) }}">
+                    <button class="delete-btn-moins"></button>
+                </form>
+                <form method="post" action="{{ path('app_liste_delete', {'id': liste.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ liste.id) }}">
+                    <button class="delete-btn"></button>
+                </form>
                 </div>
             </div>
             <div class="toutArticle">
-                <div class="article item_liste">
-                    <div class="defqte">Qte</div>
-                    <div class="defarticle">Article</div>
-                    <div class="defprix">Prix</div>
+                <h2>PANIER MALIN</h2>
+                <h2>{{ liste.dateCreation | date('d/m') }}</h2>
+                <p>COMMANDE DE {{createur.pseudo}}</p>
+                <div class="infosTicket"></div>
+                <div class="article item_liste infosTicket">
+                    <div class="defqte">QTE</div>
+                    <div class="defarticle">ARTICLE</div>
+                    <div class="defprix">PRIX</div>
                     <br>
                 </div>
-                <div class="barliste"></div>
                 {% for article in liste.composes %}
                 <div class="article item_liste">
                     <div class="article_quantite">{{ article.quantite }}</div>
@@ -31,10 +48,14 @@
                     <br>
                 </div>
                 {% endfor %}
-                <div class="barliste"></div>
-                <div class ="item_liste finticket"><span class="totalticket">Nombre d'Article</span><span class="nbtotalticket">{{liste.nbProduit()}}</span></div>
-                <div class="item_liste finticket"><span class="totalticket">Total</span><span class="nbtotalticket">{{liste.getPrix()}}</span></div>
-                <div class="barliste"></div>
+                <div class="infosTicket"></div>
+                <div class ="item_liste finticket"><span class="totalticket">NOMBRE D'ARTICLES :</span><span class="nbtotalticket">{{liste.nbProduit()}}</span></div>
+                <div class="item_liste finticket"><span class="totalticket">TOTAL :</span><span class="nbtotalticket">{{liste.getPrix()}}</span></div>
+                <div class="infosTicket"></div>
+                <div id="footerTicket">
+                    <p>MERCI D'UTILISER PANIER MALIN !</p>
+                    <div id="codeBarre"></div>
+                </div>
             </div>
         </div>
     </div>

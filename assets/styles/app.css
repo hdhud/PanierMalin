@@ -1,4 +1,5 @@
 @import url('https://fonts.cdnfonts.com/css/helvetica-neue-9');
+@import url('https://fonts.cdnfonts.com/css/merchant-copy-doublesize');
 
 * {
     margin: 0;
@@ -282,6 +283,7 @@ input::placeholder {
     align-items: center;
     text-align: center;
     flex-direction: row;
+    font-family: 'Merchant Copy Doublesize', sans-serif;
 }
 .article_quantite,.defqte{
     display: flex;
@@ -291,7 +293,7 @@ input::placeholder {
     color:black;
     height:5vh;
     width: 8vw;
-    font-size: 2vw;
+    font-size: 1rem;
 }
 .article_nom{
     display: flex;
@@ -301,7 +303,7 @@ input::placeholder {
     color:black;
     height:5vh;
     width: 20vw;
-    font-size: 2vw;
+    font-size: 1rem;
 }
 .article_prix,.defprix{
     display: flex;
@@ -311,7 +313,7 @@ input::placeholder {
     color:black;
     height:5vh;
     width: 8vw;
-    font-size: 2vw;
+    font-size: 1rem;
 }
 .supprimerarticle{
     display: flex;
@@ -322,9 +324,14 @@ input::placeholder {
     color:white;
     height:3vh;
     width: 2vw;
-    font-size: 2vw;
+    font-size: 1rem;
     font-weight: 900;
 }
+
+.infosTicket{
+    border-bottom: 2px black dashed;
+}
+
 .defarticle{
     display: flex;
     justify-content: start;
@@ -332,20 +339,21 @@ input::placeholder {
     text-align: center;
     color:black;
     height:5vh;
-    width: 24vw;
-    font-size: 2vw;
-}
-.barliste{
-    height: 2px;
-    width: 100%;
-    background-color: black;
+    width: 21.9vw;
+    font-size: 1rem;
 }
 .finticket{
     display: flex;
+    font-family: 'Merchant Copy Doublesize', sans-serif;
     justify-content: center;
     align-items: center;
     flex-direction: row;
 }
+
+.finticket span{
+    font-size: 1rem;
+}
+
 .totalticket{
     display: flex;
     justify-content: start;
@@ -372,12 +380,50 @@ input::placeholder {
 }
 .toutArticle{
     background-image: url(../images/ticket.png);
+    background-size: cover;
+    margin-bottom: 1rem;
 }
+
+.toutArticle h2{
+    padding-top:1rem;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #383838;
+}
+
+#footerTicket{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.toutArticle p{
+    padding-top:1rem;
+    font-family: 'Merchant Copy Doublesize', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+}
+
+
+#codeBarre{
+    background-image: url(../images/codeBarre.png);
+    background-size: cover;
+    height: 3.5rem;
+    width: 15rem;
+    margin-top: 0.7rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
 #addArticleContainer{
     display: flex;
     flex-direction: column;
     text-align: center;
     width: 24rem;
+    margin-bottom: 1rem;
     border: 3px solid black;
 }
 
@@ -391,10 +437,11 @@ input::placeholder {
 }
 
 #containsAll{
-    width: 100vw;
+    width: 98vw;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 #container_recherche form{
@@ -516,7 +563,7 @@ input::placeholder {
 }
 
 .collaborateur {
-    margin-top: 5rem;
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;

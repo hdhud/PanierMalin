@@ -40,13 +40,35 @@
             {{ form_widget(form) }}
         </div>
         </div>
-    </div>
 
-    <div>
-        {% for article in liste.composes %}
-            {{ article.quantite }}
-            {{ article.idArticle.nomArticle }}
-        <br>
-        {% endfor %}
-    <div>
+           <div class="toutArticle">
+            <h2>PANIER MALIN</h2>
+            <h2>{{ liste.dateCreation | date('d/m') }}</h2>
+            <p>COMMANDE DE </p>
+            <div class="infosTicket"></div>
+            <div class="article item_liste infosTicket">
+                <div class="defqte">QTE</div>
+                <div class="defarticle">ARTICLE</div>
+                <div class="defprix">PRIX</div>
+                <br>
+            </div>
+            {% for article in liste.composes %}
+            <div class="article item_liste">
+                <div class="article_quantite">{{ article.quantite }}</div>
+                <div class="article_nom">{{ article.idArticle.nomArticle }}</div>
+                <button class="supprimerarticle">-</button>
+                <div class="article_prix">{{ article.quantite * article.idArticle.prix }}</div>
+                <br>
+            </div>
+            {% endfor %}
+            <div class="infosTicket"></div>
+            <div class ="item_liste finticket"><span class="totalticket">NOMBRE D'ARTICLES :</span><span class="nbtotalticket">{{liste.nbProduit()}}</span></div>
+            <div class="item_liste finticket"><span class="totalticket">TOTAL :</span><span class="nbtotalticket">{{liste.getPrix()}}</span></div>
+            <div class="infosTicket"></div>
+            <div id="footerTicket">
+                <p>MERCI D'UTILISER PANIER MALIN !</p>
+                <div id="codeBarre"></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
