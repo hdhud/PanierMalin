@@ -171,7 +171,7 @@ class Utilisateur
 
     public function getPrixMinParListe(): float
     {
-        $prixMin = 0;
+        $prixMin = $this->getPrixMaxParListe();
         foreach ($this->listes as $liste) {
             $prixTotal = 0;
             foreach ($liste->getArticlesComposes() as $article) {
