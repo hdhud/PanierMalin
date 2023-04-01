@@ -26,6 +26,9 @@
             <h1>Dernière liste</h1>
             <div id="#dernRightLigne" class="Ligne"></div>
         </div>
+        {% if derniereListeId == null %}
+            <h1 class="h1Ligne">Vous n'avez pas encore créé de liste</h1>
+        {% else %}
         <div id="derniereLigne2">
             <div class="infosLigne">
                 <a href="{{ path('app_user_liste_id', {'id': derniereListeId}) }}"><h1 class="h1Ligne">{{derniereListe.nomListe}} &nbsp;-&nbsp; {{derniereListe.dateCreation | date('d/m/y')}}</h1></a>
@@ -42,45 +45,51 @@
             </form>
             </div>
         </div>
+        {% endif %}
     </div>
 
 
-    {% for i in 0..listeListesRegroup|length-1 %}
+    {% if derniereListeId == null %}
+        
+    {% else %}
+        {% for i in 0..listeListesRegroup|length-1 %}
 
-        <div class="derniereListeContainer">
-            <div class="ligne1liste">
-                <div id="#LeftLigne" class="LeftLigne"></div>
-                <h1>{{ listeDates[i] | date('d/m/y') }}</h1>
-                <div id="#RightLigne" class="RightLigne"></div>
-            </div>
-            <div class="listeRegroup">
-            {% for j in 0..listeListesRegroup[i]|length-1 %}
-                <div class="ligne2liste">
-                    <div class="infosLigne">
-                        <a href="{{ path('app_user_liste_id', {'id': listeListesRegroup[i][j].id}) }}"><h1 class="h1Ligne">{{listeListesRegroup[i][j].nomListe}}</h1></a>
-                    </div>
-                    <br/>
-                    <div class="moinsBouton">
-                    <form method="post" action="{{ path('app_liste_delete', {'id': listeListesRegroup[i][j].id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ listeListesRegroup[i][j].id) }}">
-                        <button class="delete-btn-moins"></button>
-                    </form>
-                    <form method="post" action="{{ path('app_liste_delete', {'id': listeListesRegroup[i][j].id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ listeListesRegroup[i][j].id) }}">
-                        <button class="delete-btn"></button>
-                    </form>
-                    </div>
+            <div class="derniereListeContainer">
+                <div class="ligne1liste">
+                    <div id="#LeftLigne" class="LeftLigne"></div>
+                    <h1>{{ listeDates[i] | date('d/m/y') }}</h1>
+                    <div id="#RightLigne" class="RightLigne"></div>
                 </div>
-            {% endfor %}
+                <div class="listeRegroup">
+                {% for j in 0..listeListesRegroup[i]|length-1 %}
+                    { <pre>
+                        {{ dump(listeListesRegroup[i][j]) }}
+                    </pre>}
+                    <div class="ligne2liste">
+                        <div class="infosLigne">
+                            <a href="{{ path('app_user_liste_id', {'id': listeListesRegroup[i][j].id}) }}"><h1 class="h1Ligne">{{listeListesRegroup[i][j].nomListe}}</h1></a>
+                        </div>
+                        <br/>
+                        <div class="moinsBouton">
+                        <form method="post" action="{{ path('app_liste_delete', {'id': listeListesRegroup[i][j].id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ listeListesRegroup[i][j].id) }}">
+                            <button class="delete-btn-moins"></button>
+                        </form>
+                        <form method="post" action="{{ path('app_liste_delete', {'id': listeListesRegroup[i][j].id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ listeListesRegroup[i][j].id) }}">
+                            <button class="delete-btn"></button>
+                        </form>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+
             </div>
-
-        </div>
-
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
         {% endfor %}
+    {% endif %}
 
     </div>
 {% endblock %}

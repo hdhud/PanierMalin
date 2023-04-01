@@ -62,15 +62,29 @@ class UserController extends AbstractController
             $i++;
         }
 
-        return $this->render('user/liste.html.twig', [
-            'controller_name' => 'UserController',
-            'listes' => $listeSansPremier,
-            'pseudo' => $session->get('pseudo'),
-            'derniereListe' => $derniereListe,
-            'derniereListeId' => $derniereListe->getId(),
-            'listeListesRegroup' => $listeListesRegroup,
-            'listeDates' => $listeDates,
-        ]);
+        var_dump($listeListesRegroup);
+
+        if ($derniereListe){
+            return $this->render('user/liste.html.twig', [
+                'controller_name' => 'UserController',
+                'listes' => $listeSansPremier,
+                'pseudo' => $session->get('pseudo'),
+                'derniereListe' => $derniereListe,
+                'derniereListeId' => $derniereListe->getId(),
+                'listeListesRegroup' => $listeListesRegroup,
+                'listeDates' => $listeDates,
+            ]);
+        } else {
+            return $this->render('user/liste.html.twig', [
+                'controller_name' => 'UserController',
+                'listes' => $listeSansPremier,
+                'pseudo' => $session->get('pseudo'),
+                'derniereListe' => null,
+                'derniereListeId' => null,
+                'listeListesRegroup' => null,
+                'listeDates' => null,
+            ]);
+        }
     }
 
     #[Route('/liste/{id}', name: 'app_user_liste_id')]
