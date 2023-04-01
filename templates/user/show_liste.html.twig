@@ -3,30 +3,40 @@
 {% block title %}Liste{% endblock %}
 
 {% block body %}
-    <h1>Liste</h1>
     <div class="pageshowlist">
         <div class="liste">
             <div class="infoliste">
                 <div class="nomliste">
-                    <div>NomListe</div>
-                    <div>{{ liste.nomListe }}</div>
+                    <div>NomListe : {{ liste.nomListe }}</div>
                 </div>
                 <div class="dateCreationliste">
-                    <div>DateCreation</div>
-                    <div>{{ liste.dateCreation }}</div>
+                    <div>Date : {{ liste.dateCreation }}</div>
                 </div>
             </div>
-            <div>
-                <div>Articles</div>
-                <div>
-                    {% for article in liste.composes %}
-                    {{ article.quantite }}
-                    {{ article.idArticle.nomArticle }} {{ article.quantite * article.idArticle.prix }} <br>
-                    {% endfor %}
-                <div>
+            <div class="toutArticle">
+                <div class="article item_liste">
+                    <div class="defqte">Qte</div>
+                    <div class="defarticle">Article</div>
+                    <div class="defprix">Prix</div>
+                    <br>
+                </div>
+                <div class="barliste"></div>
+                {% for article in liste.composes %}
+                <div class="article item_liste">
+                    <div class="article_quantite">{{ article.quantite }}</div>
+                    <div class="article_nom">{{ article.idArticle.nomArticle }}</div>
+                    <button class="supprimerarticle">-</button>
+                    <div class="article_prix">{{ article.quantite * article.idArticle.prix }}</div>
+                    <br>
+                </div>
+                {% endfor %}
+                <div class="barliste"></div>
+                <div class ="item_liste finticket"><span class="totalticket">Nombre d'Article</span><span class="nbtotalticket">{{liste.nbProduit()}}</span></div>
+                <div class="item_liste finticket"><span class="totalticket">Total</span><span class="prixtotal">{{liste.getPrix()}}</span></div>
+                <div class="barliste"></div>
             </div>
         </div>
-        <div>
+        <div class="Ajout_article">
             <h2>Ajouter un article</h2>
 
             {{ form_start(form) }}

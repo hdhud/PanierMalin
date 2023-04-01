@@ -71,7 +71,7 @@ class Liste
     {
         $prix = 0;
         foreach ($this->composes as $compose) {
-            $prix += $compose->getPrix();
+            $prix += $compose->getPrix()*$compose->getQuantite();
         }
         return $prix;
     }
@@ -105,6 +105,15 @@ class Liste
             $prix += $compose->getPrix();
         }
         return $prix / count($this->composes);
+    }
+    public function nbProduit(): ?int
+    {   
+        $count=0;
+        foreach ($this->composes as $compose) {
+                $count += $compose->getQuantite();
+            
+        }
+        return $count;
     }
 
     /**
@@ -148,7 +157,7 @@ class Liste
 
         return $this;
     }
-
+    
     public function removeCompose(Compose $compose): self
     {
         if ($this->composes->removeElement($compose)) {
