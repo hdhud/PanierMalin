@@ -93,7 +93,7 @@ input::placeholder {
     cursor: pointer;
 }
 
-#toutAccueil{
+#toutAccueil,.ajoutcollaborateur{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -229,6 +229,23 @@ input::placeholder {
     text-align: center;
     border: 3px solid black;
 }
+.back{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 50px;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    width:50px;
+    background-color: rgb(0, 0, 0);
+    font-size: 2vw;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+    margin:15px;
+
+
+}
 .pageshowlist{
     display: flex;
     justify-content: space-around;
@@ -353,124 +370,9 @@ input::placeholder {
     font-size: 2vw;
 
 }
-.item_liste:nth-child(39n+0){
-    background-image: url(../images/00.png);
+.toutArticle{
+    background-image: url(../images/ticket.png);
 }
-.item_liste:nth-child(39n+1){
-    background-image: url(../images/01.png);
-}
-.item_liste:nth-child(39n+2){
-    background-image: url(../images/02.png);
-}
-.item_liste:nth-child(39n+3){
-    background-image: url(../images/03.png);
-}
-.item_liste:nth-child(39n+4){
-    background-image: url(../images/04.png);
-}
-.item_liste:nth-child(39n+5){
-    background-image: url(../images/05.png);
-}
-.item_liste:nth-child(39n+6){
-    background-image: url(../images/06.png);
-}
-.item_liste:nth-child(39n+7){
-    background-image: url(../images/07.png);
-}
-.item_liste:nth-child(39n+8){
-    background-image: url(../images/08.png);
-}
-.item_liste:nth-child(39n+9){
-    background-image: url(../images/09.png);
-}
-.item_liste:nth-child(39n+10){
-    background-image: url(../images/010.png);
-}
-.item_liste:nth-child(39n+11){
-    background-image: url(../images/011.png);
-}
-.item_liste:nth-child(39n+12){
-    background-image: url(../images/012.png);
-}
-.item_liste:nth-child(39n+13){
-    background-image: url(../images/013.png);
-}
-.item_liste:nth-child(39n+14){
-    background-image: url(../images/014.png);
-}
-.item_liste:nth-child(39n+15){
-    background-image: url(../images/015.png);
-}
-.item_liste:nth-child(39n+16){
-    background-image: url(../images/016.png);
-}
-.item_liste:nth-child(39n+17){
-    background-image: url(../images/017.png);
-}
-.item_liste:nth-child(39n+18){
-    background-image: url(../images/018.png);
-}
-.item_liste:nth-child(39n+19){
-    background-image: url(../images/019.png);
-}
-.item_liste:nth-child(39n+20){
-    background-image: url(../images/020.png);
-}
-.item_liste:nth-child(39n+21){
-    background-image: url(../images/021.png);
-}
-.item_liste:nth-child(39n+22){
-    background-image: url(../images/022.png);
-}
-.item_liste:nth-child(39n+23){
-    background-image: url(../images/023.png);
-}
-.item_liste:nth-child(39n+24){
-    background-image: url(../images/024.png);
-}
-.item_liste:nth-child(39n+25){
-    background-image: url(../images/025.png);
-}
-.item_liste:nth-child(39n+26){
-    background-image: url(../images/026.png);
-}
-.item_liste:nth-child(39n+27){
-    background-image: url(../images/027.png);
-}
-.item_liste:nth-child(39n+28){
-    background-image: url(../images/028.png);
-}
-.item_liste:nth-child(39n+29){
-    background-image: url(../images/029.png);
-}
-.item_liste:nth-child(39n+30){
-    background-image: url(../images/030.png);
-}
-.item_liste:nth-child(39n+31){
-    background-image: url(../images/031.png);
-}
-.item_liste:nth-child(39n+32){
-    background-image: url(../images/032.png);
-}
-.item_liste:nth-child(39n+33){
-    background-image: url(../images/033.png);
-}
-.item_liste:nth-child(39n+34){
-    background-image: url(../images/034.png);
-}
-.item_liste:nth-child(39n+35){
-    background-image: url(../images/035.png);
-}
-.item_liste:nth-child(39n+36){
-    background-image: url(../images/036.png);
-}
-.item_liste:nth-child(39n+37){
-    background-image: url(../images/037.png);
-}
-.item_liste:nth-child(39n+38){
-    background-image: url(../images/038.png);
-}
-
 #addArticleContainer{
     display: flex;
     flex-direction: column;
@@ -611,4 +513,32 @@ input::placeholder {
     width: 1.3rem;
     height: 0.7rem;
     transform: rotate(35deg);
+}
+
+.collaborateur {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 1rem;
+
+}
+#btncollaborateur{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:5rem ;
+    height: 5rem;
+}
+.formcollaborateur{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
