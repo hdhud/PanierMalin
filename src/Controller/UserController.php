@@ -42,16 +42,17 @@ class UserController extends AbstractController
         $i = 0;
         $listeListesRegroup = [];
         $listeListeDatePareille = [];
-
+        
         foreach ($listes as $liste) {
             $temp = substr($liste->getDateCreation(), 0, 10);
             if (!in_array($temp, $listeDates)) {
                 $listeDates[] = $temp;
             }
         }
+      
 
         foreach ($listeDates as $date) {
-            foreach ($listeSansPremier as $liste) {
+            foreach ($listes as $liste) {
                 $temp = substr($liste->getDateCreation(), 0, 10);
                 if ($temp === $date) {
                     $listeListeDatePareille[] = $liste;
@@ -62,15 +63,27 @@ class UserController extends AbstractController
             $i++;
         }
 
-        return $this->render('user/liste.html.twig', [
-            'controller_name' => 'UserController',
-            'listes' => $listeSansPremier,
-            'pseudo' => $session->get('pseudo'),
-            'derniereListe' => $derniereListe,
-            'derniereListeId' => $derniereListe->getId(),
-            'listeListesRegroup' => $listeListesRegroup,
-            'listeDates' => $listeDates,
-        ]);
+        if($derniereListe){
+            return $this->render('user/liste.html.twig', [
+                'controller_name' => 'UserController',
+                'listes' => $listeSansPremier,
+                'pseudo' => $session->get('pseudo'),
+                'derniereListe' => $derniereListe,
+                'derniereListeId' => $derniereListe->getId(),
+                'listeListesRegroup' => $listeListesRegroup,
+                'listeDates' => $listeDates,
+            ]);
+        } else {
+            return $this->render('user/liste.html.twig', [
+                'controller_name' => 'UserController',
+                'listes' => $listeSansPremier,
+                'pseudo' => $session->get('pseudo'),
+                'derniereListe' => null,
+                'derniereListeId' => null,
+                'listeListesRegroup' => null,
+                'listeDates' => null,
+            ]);
+        }
     }
 
     #[Route('/liste/{id}', name: 'app_user_liste_id')]
