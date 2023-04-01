@@ -5,7 +5,7 @@
 {% block body %}
     <div class="pageshowlist">
         <div class="liste">
-                <div class="ligne2liste">
+                <div class="ligne2listeNoSPBTW">
                 <div class="retourBouton">
                     <a href="{{ path('app_user_liste') }}">
                         <div id="diagHaut"></div>
@@ -58,16 +58,16 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="collaborateur">
-        <div>Collaborateurs</div>
-        <div>
+
+        <div class="collaborateur">
+        <h1>Collaborateurs</h1>
+        <div id="listeCollab">
              {% for collaborateur in collaborateurs %}
                 {{ collaborateur }}
                 <br>
             {% endfor %} 
         </div>
-        <h1>Ajouter un collaborateur</h1>
+        <h2>Ajouter un collaborateur</h2>
         <div>
             <form action="{{ path('app_user_liste_id_collaborer', {'id': liste.id}) }}" method="get" class="formcollaborateur">
                 <input class="form-pseudo"type="text" name="pseudo" placeholder="Pseudo">
@@ -79,5 +79,6 @@
                 </button>
             </form>
         </div>
+    </div>
     </div>
 {% endblock %}
