@@ -38,6 +38,29 @@ class UserController extends AbstractController
         $listes = $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')])->getListesOrderByMostRecent();
         $listeSansPremier = $listes->slice(1);
         $derniereListe = $listes[0];
+        $listeDates = []; // tableau qui contiendra les dates de création de toutes les listes
+        $i = 0;
+        $listeListesRegroup = [];
+        $listeListeDatePareille = [];
+
+        foreach ($listes as $liste) {
+            $temp = substr($liste->getDateCreation(), 0, 10);
+            if (!in_array($temp, $listeDates)) {
+                $listeDates[] = $temp;
+            }
+        }
+
+        foreach ($listeDates as $date) {
+            foreach ($listeSansPremier as $liste) {
+                $temp = substr($liste->getDateCreation(), 0, 10);
+                if ($temp === $date) {
+                    $listeListeDatePareille[] = $liste;
+                }
+            }
+            $listeListesRegroup[$i] = $listeListeDatePareille;
+            $listeListeDatePareille = [];
+            $i++;
+        }
 
         return $this->render('user/liste.html.twig', [
             'controller_name' => 'UserController',
@@ -45,6 +68,8 @@ class UserController extends AbstractController
             'pseudo' => $session->get('pseudo'),
             'derniereListe' => $derniereListe,
             'derniereListeId' => $derniereListe->getId(),
+            'listeListesRegroup' => $listeListesRegroup,
+            'listeDates' => $listeDates,
         ]);
     }
 

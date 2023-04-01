@@ -122,16 +122,31 @@ input::placeholder {
     padding: 0 6px;
 }
 
-#derniereListeContainer{
+.derniereListeContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#derniereLigne1,#derniereLigne2,.ligne1liste,.ligne2liste{
+.listeRegroup{
+    display: flex;
+    flex-direction: column;
+}
+
+.ligne2liste{
+    justify-content: space-between;
+}
+
+#derniereLigne1,#derniereLigne2,.ligne1liste{
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.ligne2liste{
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
