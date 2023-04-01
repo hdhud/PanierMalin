@@ -100,6 +100,7 @@ allDivs.forEach(function (div) {
             }, 300);
             div.children[0].children[1].style.background = 'black';
             div.children[0].children[1].style.color = 'white';
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     });
 });
