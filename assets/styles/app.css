@@ -17,6 +17,10 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
+body::-webkit-scrollbar {
+    width: 0;
+}
+
 .navigation-bar {
     height: 100px;
     display: flex;
@@ -44,8 +48,8 @@ body {
     border: 3px solid black;
 }
 
-.form-pseudo{
-    height: 10vh;
+.form-collab{
+    height: 4rem;
     font-family: 'Helvetica 55 Roman', sans-serif;
     width:22rem;
     background-color: rgb(255, 255, 255);
@@ -138,11 +142,16 @@ input::placeholder {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: top 0.5s ease-in-out;
+    top:0;
+    position:static;
 }
 
 .listeRegroup{
-    display: flex;
+    display: none;
     flex-direction: column;
+    transition: 0.3s ease;
+    opacity: 0;
 }
 
 #derniereLigne1,#derniereLigne2,.ligne1liste{
@@ -230,6 +239,17 @@ input::placeholder {
 
 .ligne1liste h1{
     padding: 0 10px;
+    background: black;
+    color: white;
+    margin: 10px 0;
+    caret-color: transparent;
+    transition: 0.3s ease;
+}
+
+.ligne1liste h1:hover{
+    transform: scale(1.05);
+    transition: 0.3s ease;
+    cursor: pointer;
 }
 
 .RightLigne,.LeftLigne{
@@ -572,6 +592,8 @@ input::placeholder {
     width:4.1rem;
     background-color: black;
     margin-right:20px;
+    background-image: url(../images/fleche.png);
+    background-size: cover;
     caret-color: transparent;
     transition : 0.3s ease;
 }
@@ -580,35 +602,6 @@ input::placeholder {
     transform: scale(1.2);
     transition: 0.5s ease;
     cursor: pointer;
-}
-
-.retourBouton #horizontal{
-    background-color: rgb(255, 255, 255);
-    position:relative;
-    top: 1.1rem;
-    left: 0.85rem;
-    width: 2.3rem;
-    height: 0.7rem;
-}
-
-.retourBouton #diagHaut {
-    background-color: rgb(255, 255, 255);
-    position:relative;
-    top: 1.35rem;
-    left: 0.9rem;
-    width: 1.3rem;
-    height: 0.7rem;
-    transform: rotate(-35deg);
-}
-
-.retourBouton #diagBas {
-    background-color: rgb(255, 255, 255);
-    position:relative;
-    top: 0.85rem;
-    left: 0.9rem;
-    width: 1.3rem;
-    height: 0.7rem;
-    transform: rotate(35deg);
 }
 
 .collaborateur {

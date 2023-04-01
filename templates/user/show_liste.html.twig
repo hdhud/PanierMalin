@@ -6,13 +6,9 @@
     <div class="pageshowlist">
         <div class="liste">
                 <div class="ligne2listeNoSPBTW">
-                <div class="retourBouton">
-                    <a href="{{ path('app_user_liste') }}">
-                        <div id="diagHaut"></div>
-                        <div id="horizontal"></div>
-                        <div id="diagBas"></div>
-                    </a>
-                </div>
+                <a href="{{ path('app_user_liste') }}">
+                    <div class="retourBouton"></div>
+                </a>
                 <div class="infosLigne">
                     <h1 class="h1Ligne">{{liste.nomListe}}</h1>
                 </div>
@@ -70,7 +66,7 @@
         <h2>Ajouter un collaborateur</h2>
         <div>
             <form action="{{ path('app_user_liste_id_collaborer', {'id': liste.id}) }}" method="get" class="formcollaborateur">
-                <input class="form-pseudo"type="text" name="pseudo" placeholder="Pseudo">
+                <input class="form-collab"type="text" name="pseudo" placeholder="Pseudo">
                 <button id="btncollaborateur"type="submit">
                     <div id="plusBouton">
                         <div id="vertical"></div>

@@ -5,13 +5,9 @@
 {% block body %}
 
         <div class="ligne2listeNoSPBTW">
-            <div class="retourBouton">
-                <a href="{{ path('app_user_liste') }}">
-                    <div id="diagHaut"></div>
-                    <div id="horizontal"></div>
-                    <div id="diagBas"></div>
-                </a>
-            </div>
+            <a href="{{ path('app_user_liste') }}">
+                    <div class="retourBouton"></div>
+            </a>
             <div class="infosLigne">
                 <h1 class="h1Ligne">{{liste.nomListe}}</h1>
             </div>
