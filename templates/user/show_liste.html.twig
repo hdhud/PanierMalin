@@ -3,6 +3,22 @@
 {% block title %}Liste{% endblock %}
 
 {% block body %}
+    <div>
+        <div>Collaborateurs</div>
+        <div>
+            {# {% for collaborateur in liste.collaborateurs %}
+                {{ collaborateur.idUser.pseudo }}
+                <br>
+            {% endfor %} #}
+        </div>
+        <span>Ajouter un collaborateur</span>
+        <div>
+            <form action="{{ path('app_user_liste_id_collaborer', {'id': liste.id}) }}" method="get">
+                <input type="text" name="pseudo" placeholder="Pseudo">
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </div>
     <div class="pageshowlist">
         <div class="liste">
             <div class="infoliste">
@@ -32,19 +48,20 @@
                 {% endfor %}
                 <div class="barliste"></div>
                 <div class ="item_liste finticket"><span class="totalticket">Nombre d'Article</span><span class="nbtotalticket">{{liste.nbProduit()}}</span></div>
-                <div class="item_liste finticket"><span class="totalticket">Total</span><span class="prixtotal">{{liste.getPrix()}}</span></div>
+                <div class="item_liste finticket"><span class="totalticket">Total</span><span class="nbtotalticket">{{liste.getPrix()}}</span></div>
                 <div class="barliste"></div>
             </div>
         </div>
-        <div class="Ajout_article">
+        <div>
             <h2>Ajouter un article</h2>
-
+            {#}
             {{ form_start(form) }}
                 {{ form_row(form.idArticle) }}
                 {{ form_row(form.quantite) }}
                 {{ form_row(form.estMarque) }}
                 <button type="submit">{{button_label|default("Ajouter à la liste")}}</button>
             {{ form_widget(form) }}
+            {{ form_end(form) }}#}
         </div>
     </div>
     <a href="{{ path('app_user_liste') }}">back to list</a>

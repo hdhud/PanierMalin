@@ -51,6 +51,14 @@ class Utilisateur
         return $this->listes;
     }
 
+    public function getListesOrderByMostRecent(): Collection
+    {
+        $listes = $this->listes->toArray();
+        usort($listes, fn (Liste $a, Liste $b) => $b->getDateCreation() <=> $a->getDateCreation());
+
+        return new ArrayCollection($listes);
+    }
+
     public function addListe(Liste $liste): self
     {
         if (!$this->listes->contains($liste)) {

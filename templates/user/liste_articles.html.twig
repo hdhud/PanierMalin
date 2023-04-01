@@ -3,22 +3,50 @@
 {% block title %}New Liste{% endblock %}
 
 {% block body %}
-    <h1>Create new Liste</h1>
+
+        <div class="ligne2liste">
+            <div class="retourBouton">
+                <a href="{{ path('app_user_liste') }}">
+                    <div id="diagHaut"></div>
+                    <div id="horizontal"></div>
+                    <div id="diagBas"></div>
+                </a>
+            </div>
+            <div class="infosLigne">
+                <h1 class="h1Ligne">{{liste.nomListe}}</h1>
+            </div>
+            <br/>
+            <div class="moinsBouton">
+            <form method="post" action="{{ path('app_liste_delete', {'id': liste.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ liste.id) }}">
+                <button class="delete-btn-moins"></button>
+            </form>
+            <form method="post" action="{{ path('app_liste_delete', {'id': liste.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ liste.id) }}">
+                <button class="delete-btn"></button>
+            </form>
+            </div>
+        </div>
     
-        <td>{{ liste }}</td>
-        <ul id="allIng"> 
-        </ul>
+    <div id="containsAll">
+        <div id="addArticleContainer">
+            <h2>Ajouter un article</h2>
         <div class="container_recherche" id="container_recherche">
             {{ form_start(form) }}
-                {{ form_row(form.idListe) }}
                 {{ form_row(form.idArticle) }}
                 {{ form_row(form.quantite) }}
                 {{ form_row(form.estMarque) }}
-                <button type="submit">{{button_label|default("Ajouter à la liste")}}</button>
+                <button type="submit">{{button_label|default("Ajouter")}}</button>
             {{ form_widget(form) }}
         </div>
+        </div>
+    </div>
 
-
-
-    <a href="{{ path('app_user_liste') }}">back to list</a>
+    <div>
+        {% for article in liste.composes %}
+            {{ article.quantite }}
+            {{ article.idArticle.nomArticle }}
+        <br>
+        {% endfor %}
+    <div>
 {% endblock %}
