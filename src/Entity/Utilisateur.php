@@ -56,6 +56,135 @@ class Utilisateur
         return $this->listes;
     }
 
+    public function getNumberOfListes(): int
+    {
+        return $this->listes->count();
+    }
+
+    public function getNumberOfArticles(): int
+    {
+        $int = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                $int += $article->getQuantite();
+            }
+        }
+
+        return $int;
+    }
+
+    public function getNumberOfArticlesEstMarque(): int
+    {
+        $int = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                if ($article->isEstMarque()) {
+                    $int += $article->getQuantite();
+                }
+            }
+        }
+
+        return $int;
+    }
+
+    public function getNumberOfArticlesNonEstMarque(): int
+    {
+        $int = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                if (!$article->isEstMarque()) {
+                    $int += $article->getQuantite();
+                }
+            }
+        }
+
+        return $int;
+    }
+
+    public function getPrixTotal(): float
+    {
+        $prixTotal = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                $prixTotal += $article->getPrix() * $article->getQuantite();
+            }
+        }
+
+        return $prixTotal;
+    }
+
+    public function getPrixTotalEstMarque(): float
+    {
+        $prixTotal = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                if ($article->isEstMarque()) {
+                    $prixTotal += $article->getPrix() * $article->getQuantite();
+                }
+            }
+        }
+
+        return $prixTotal;
+    }
+
+    public function getPrixTotalNonEstMarque(): float
+    {
+        $prixTotal = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                if (!$article->isEstMarque()) {
+                    $prixTotal += $article->getPrix() * $article->getQuantite();
+                }
+            }
+        }
+
+        return $prixTotal;
+    }
+
+    public function getPrixMoyenParListe(): float
+    {
+        $prixTotal = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                $prixTotal += $article->getPrix() * $article->getQuantite();
+            }
+        }
+
+        return $prixTotal / $this->listes->count();
+    }
+
+    public function getPrixMaxParListe(): float
+    {
+        $prixMax = 0;
+        foreach ($this->listes as $liste) {
+            $prixTotal = 0;
+            foreach ($liste->getArticlesComposes() as $article) {
+                $prixTotal += $article->getPrix() * $article->getQuantite();
+            }
+            if ($prixTotal > $prixMax) {
+                $prixMax = $prixTotal;
+            }
+        }
+
+        return $prixMax;
+    }
+
+    public function getPrixMinParListe(): float
+    {
+        $prixMin = 0;
+        foreach ($this->listes as $liste) {
+            $prixTotal = 0;
+            foreach ($liste->getArticlesComposes() as $article) {
+                $prixTotal += $article->getPrix() * $article->getQuantite();
+            }
+            if ($prixTotal < $prixMin) {
+                $prixMin = $prixTotal;
+            }
+        }
+
+        return $prixMin;
+    }
+
     public function getListesOrderByMostRecent(): Collection
     {
         $listes = $this->listes->toArray();

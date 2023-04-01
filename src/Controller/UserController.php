@@ -72,6 +72,7 @@ class UserController extends AbstractController
                 'derniereListeId' => $derniereListe->getId(),
                 'listeListesRegroup' => $listeListesRegroup,
                 'listeDates' => $listeDates,
+                'user' => $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')]),
             ]);
         } else {
             return $this->render('user/liste.html.twig', [

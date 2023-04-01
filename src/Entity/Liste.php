@@ -67,6 +67,25 @@ class Liste
         return $this;
     }
 
+    public function getArticles(): ?array
+    {
+        $articles = [];
+        foreach ($this->composes as $compose) {
+            $articles[] = $compose->getidArticle();
+        }
+        return $articles;
+    }
+
+    public function getArticlesComposes(): ?array
+    {
+        $articles = [];
+        foreach ($this->composes as $compose) {
+            $articles[] = $compose;
+        }
+        return $articles;
+    }
+
+
     public function getPrix(): ?float
     {
         $prix = 0;
