@@ -80,15 +80,18 @@ class UserController extends AbstractController
         $userCreeListe = $liste->getCreePar()->first(); // récupère le premier utilisateur qui a créé la liste
         $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
 
-        if ($userCreeListe && $userCreeListe->getPseudo() === $currentUserPseudo) {
-            return $this->render('user/show_liste.html.twig', [
-                'controller_name' => 'UserController',
-                'liste' => $liste,
-                'createur' => $userCreeListe,
-            ]);
-        } else {
-            return $this->redirectToRoute('app_user_liste');
+        for ($i = 0; $i < count($liste->getCreePar()); $i++) {
+            if($liste->getCreePar()[$i]->getPseudo() === $currentUserPseudo) {
+                return $this->render('user/show_liste.html.twig', [
+                    'controller_name' => 'UserController',
+                    'liste' => $liste,
+                    'createur' => $userCreeListe,
+                    'collaborateurs' => $liste->getCreePar(),
+                ]);
+            }
         }
+        return $this->redirectToRoute('app_user_liste');
+        
     }
     
     #[Route('/liste/{id}/collaborer', name: 'app_user_liste_id_collaborer', methods: ['GET', 'POST'])]

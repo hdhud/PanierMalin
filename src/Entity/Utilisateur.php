@@ -26,6 +26,11 @@ class Utilisateur
         $this->listes = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->pseudo;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
