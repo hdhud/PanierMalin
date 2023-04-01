@@ -60,13 +60,13 @@
         </div>
     </div>
     <div class="collaborateur">
-        {#<div>Collaborateurs</div>
+        <div>Collaborateurs</div>
         <div>
-             {% for collaborateur in liste.collaborateurs %}
-                {{ collaborateur.idUser.pseudo }}
+             {% for collaborateur in collaborateurs %}
+                {{ collaborateur }}
                 <br>
             {% endfor %} 
-        </div>#}
+        </div>
         <h1>Ajouter un collaborateur</h1>
         <div>
             <form action="{{ path('app_user_liste_id_collaborer', {'id': liste.id}) }}" method="get" class="formcollaborateur">
