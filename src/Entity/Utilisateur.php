@@ -6,6 +6,7 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Query\Expr\Math;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur
@@ -110,7 +111,7 @@ class Utilisateur
             }
         }
 
-        return $prixTotal;
+        return round($prixTotal,2);
     }
 
     public function getPrixTotalEstMarque(): float
@@ -153,6 +154,20 @@ class Utilisateur
         return $prixTotal / $this->listes->count();
     }
 
+    public function getPrixMoyenArticleParListe(): float
+    {
+        $prixTotal = 0;
+        $nombreArticles = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                $prixTotal += $article->getPrix() * $article->getQuantite();
+                $nombreArticles += $article->getQuantite();
+            }
+        }
+
+        return round($prixTotal / $nombreArticles, 2);
+    }
+
     public function getPrixMaxParListe(): float
     {
         $prixMax = 0;
@@ -179,6 +194,34 @@ class Utilisateur
             }
             if ($prixTotal < $prixMin) {
                 $prixMin = $prixTotal;
+            }
+        }
+
+        return $prixMin;
+    }
+
+    public function getPrixMaxArticleParListe(): float
+    {
+        $prixMax = 0;
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                if ($article->getPrix() > $prixMax) {
+                    $prixMax = $article->getPrix();
+                }
+            }
+        }
+
+        return $prixMax;
+    }
+
+    public function getPrixMinArticleParListe(): float
+    {
+        $prixMin = $this->getPrixMaxArticleParListe();
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                if ($article->getPrix() < $prixMin) {
+                    $prixMin = $article->getPrix();
+                }
             }
         }
 
