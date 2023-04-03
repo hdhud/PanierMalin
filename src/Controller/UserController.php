@@ -83,16 +83,25 @@ class UserController extends AbstractController
                 'derniereListeId' => null,
                 'listeListesRegroup' => null,
                 'listeDates' => null,
+                'user' => $utilisateurRepository->findOneBy(['pseudo' => $session->get('pseudo')]),
             ]);
         }
     }
 
     #[Route('/liste/{id}', name: 'app_user_liste_id')]
-    public function listeID(Liste $liste, SessionInterface $session): Response
+    public function listeID(Liste $liste, SessionInterface $session, Request $request, ComposeRepository $composeRepository): Response
     {
-        // A CHANGER ET ENLEVER LE FIRST
         $userCreeListe = $liste->getCreePar()->first(); // récupère le premier utilisateur qui a créé la liste
         $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
+
+        $compose = new Compose();
+        $form = $this->createForm(AddArticleType::class, $compose);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $compose->setIdListe($liste);
+            $composeRepository->save($compose, true);
+        }
 
         for ($i = 0; $i < count($liste->getCreePar()); $i++) {
             if($liste->getCreePar()[$i]->getPseudo() === $currentUserPseudo) {
@@ -101,6 +110,7 @@ class UserController extends AbstractController
                     'liste' => $liste,
                     'createur' => $userCreeListe,
                     'collaborateurs' => $liste->getCreePar(),
+                    'form' => $form->createView(),
                 ]);
             }
         }
@@ -112,10 +122,24 @@ class UserController extends AbstractController
     public function listeIDCollaborer(UtilisateurRepository $utilisateurRepository, ListeRepository $listeRepository, Liste $liste, Request $request): Response
     {
         $pseudo = $request->get('pseudo');
-        dump($pseudo);
 
         $user = $utilisateurRepository->findOneBy(['pseudo' => $pseudo]);
 
+        if (!$user) {
+            return $this->redirectToRoute('app_user_liste_id',
+                ['id' => $liste->getId(),
+                'error' => 'userNotFound'
+            ],
+                Response::HTTP_SEE_OTHER);
+        }
+
+        if ($liste->getCreePar()->contains($user)) {
+            return $this->redirectToRoute('app_user_liste_id',
+                ['id' => $liste->getId(),
+                'error' => 'alreadyCollaborator'
+            ],
+                Response::HTTP_SEE_OTHER);
+        }
         $liste->addCreePar($user);
      
         $listeRepository->save($liste, true);

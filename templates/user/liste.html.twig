@@ -6,13 +6,23 @@
 
     <div id="statsContainer">
         <h1>Bonjour, {{ pseudo }}. Voici vos différentes statistiques d'achats :</h1>
-        <div class="table center">
-            <div class="monitor-wrapper center">
-                <div class="monitor center">
-                <p>Nombre d'articles : <font color="FF0000">{{ user.getNumberOfArticles }}</font>, Prix total : <font color="FF0000">{{ user.getPrixTotal }}</font> €, Prix moyen des articles : <font color="FF0000">{{ user.getPrixMoyenArticleParListe }} </font>€, Prix de l'article le plus cher : <font color="FF0000">{{ user.getPrixMaxArticleParListe }} </font>€, Prix de l'article le moins cher : <font color="FF0000">{{ user.getPrixMinArticleParListe }} </font>€</p>
+        {% if user.getNumberOfArticles == 0 %}
+            <div class="table center">
+                <div class="monitor-wrapper center">
+                    <div class="monitor center">
+                    <p>Vous n'avez pas encore créé de liste</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <div class="table center">
+                <div class="monitor-wrapper center">
+                    <div class="monitor center">
+                    <p>Nombre d'articles : <font color="FF0000">{{ user.getNumberOfArticles }}</font>, Prix total : <font color="FF0000">{{ user.getPrixTotal }}</font> €, Prix moyen des articles : <font color="FF0000">{{ user.getPrixMoyenArticleParListe }} </font>€, Prix de l'article le plus cher : <font color="FF0000">{{ user.getPrixMaxArticleParListe }} </font>€, Prix de l'article le moins cher : <font color="FF0000">{{ user.getPrixMinArticleParListe }} </font>€</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
 

@@ -55,26 +55,44 @@
             </div>
         </div>
 
+        <div id="addArticleContainer">
+            <h2>Ajouter un article</h2>
+            <div class="container_recherche" id="container_recherche">
+                {{ form_start(form) }}
+                    {{ form_row(form.idArticle) }}
+                    {{ form_row(form.quantite) }}
+                    {{ form_row(form.estMarque) }}
+                    <button type="submit">{{button_label|default("Ajouter")}}</button>
+                {{ form_widget(form) }}
+            </div>
+        </div>
+        
         <div class="collaborateur">
-        <h1>Collaborateurs</h1>
-        <div id="listeCollab">
-             {% for collaborateur in collaborateurs %}
-                {{ collaborateur }}
-                <br>
-            {% endfor %} 
+            <h1>Collaborateurs</h1>
+            <div id="listeCollab">
+                {% for collaborateur in collaborateurs %}
+                    {{ collaborateur }}
+                    <br>
+                {% endfor %} 
+            </div>
+            <h2>Ajouter un collaborateur</h2>
+            {% if app.request.get('error') == 'userNotFound' %}
+                <p class="error">Utilisateur non trouvé</p>
+            {% endif %}
+            {% if app.request.get('error') == 'alreadyCollaborator' %}
+                <p class="error">Utilisateur déjà collaborateur</p>
+            {% endif %}
+            <div>
+                <form action="{{ path('app_user_liste_id_collaborer', {'id': liste.id}) }}" method="get" class="formcollaborateur">
+                    <input class="form-collab"type="text" name="pseudo" placeholder="Pseudo">
+                    <button id="btncollaborateur"type="submit">
+                        <div id="plusBouton">
+                            <div id="vertical"></div>
+                            <div id="horizontal"></div>
+                        </div>
+                    </button>
+                </form>
+            </div>
         </div>
-        <h2>Ajouter un collaborateur</h2>
-        <div>
-            <form action="{{ path('app_user_liste_id_collaborer', {'id': liste.id}) }}" method="get" class="formcollaborateur">
-                <input class="form-collab"type="text" name="pseudo" placeholder="Pseudo">
-                <button id="btncollaborateur"type="submit">
-                    <div id="plusBouton">
-                        <div id="vertical"></div>
-                        <div id="horizontal"></div>
-                    </div>
-                </button>
-            </form>
-        </div>
-    </div>
     </div>
 {% endblock %}

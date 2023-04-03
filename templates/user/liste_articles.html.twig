@@ -27,14 +27,14 @@
     <div id="containsAll">
         <div id="addArticleContainer">
             <h2>Ajouter un article</h2>
-        <div class="container_recherche" id="container_recherche">
-            {{ form_start(form) }}
-                {{ form_row(form.idArticle) }}
-                {{ form_row(form.quantite) }}
-                {{ form_row(form.estMarque) }}
-                <button type="submit">{{button_label|default("Ajouter")}}</button>
-            {{ form_widget(form) }}
-        </div>
+            <div class="container_recherche" id="container_recherche">
+                {{ form_start(form) }}
+                    {{ form_row(form.idArticle) }}
+                    {{ form_row(form.quantite) }}
+                    {{ form_row(form.estMarque) }}
+                    <button type="submit">{{button_label|default("Ajouter")}}</button>
+                {{ form_widget(form) }}
+            </div>
         </div>
 
            <div class="toutArticle">
