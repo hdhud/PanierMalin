@@ -39,6 +39,17 @@ class ListeRepository extends ServiceEntityRepository
         }
     }
 
+    public function deleteListeAndComposes(Liste $liste): void
+    {
+        $this->getEntityManager()->createQuery('DELETE FROM App\Entity\Compose c WHERE c.idListe = :idListe')
+            ->setParameter('idListe', $liste->getId())
+            ->execute();
+
+        $this->getEntityManager()->createQuery('DELETE FROM App\Entity\Liste l WHERE l.id = :idListe')
+            ->setParameter('idListe', $liste->getId())
+            ->execute();
+    }
+
 //    /**
 //     * @return Liste[] Returns an array of Liste objects
 //     */

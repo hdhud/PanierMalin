@@ -76,7 +76,7 @@ class ListeController extends AbstractController
     public function delete(Request $request, Liste $liste, ListeRepository $listeRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$liste->getId(), $request->request->get('_token'))) {
-            $listeRepository->remove($liste, true);
+            $listeRepository->deleteListeAndComposes($liste);
         }
 
         return $this->redirectToRoute('app_user_liste', [], Response::HTTP_SEE_OTHER);
