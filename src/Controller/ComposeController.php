@@ -70,9 +70,10 @@ class ComposeController extends AbstractController
     public function delete(Request $request, Compose $compose, ComposeRepository $composeRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$compose->getId(), $request->request->get('_token'))) {
+            $id = $compose->getidListe()->getId();
             $composeRepository->remove($compose, true);
         }
 
-        return $this->redirectToRoute('app_compose_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_user_liste_id', ['id'=>$id], Response::HTTP_SEE_OTHER);
     }
 }
