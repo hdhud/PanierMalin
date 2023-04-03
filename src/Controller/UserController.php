@@ -21,6 +21,7 @@ use App\Form\ComposeType;
 use App\Repository\ComposeRepository;
 use App\Form\AddArticleType;
 
+
 #[Route('/user')]
 class UserController extends AbstractController
 {
@@ -95,9 +96,11 @@ class UserController extends AbstractController
         $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
 
         $compose = new Compose();
+        $coche = new Compose();
         $form = $this->createForm(AddArticleType::class, $compose);
         $form->handleRequest($request);
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $compose->setIdListe($liste);
             $composeRepository->save($compose, true);
@@ -110,7 +113,7 @@ class UserController extends AbstractController
                     'liste' => $liste,
                     'createur' => $userCreeListe,
                     'collaborateurs' => $liste->getCreePar(),
-                    'form' => $form->createView(),
+                    'form' => $form->createView()
                 ]);
             }
         }
@@ -143,6 +146,39 @@ class UserController extends AbstractController
         $liste->addCreePar($user);
      
         $listeRepository->save($liste, true);
+        
+        return $this->redirectToRoute('app_user_liste_id',
+            ['id' => $liste->getId()],
+            Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/liste/{id}/cocher', name: 'app_user_liste_id_cocher', methods: ['GET', 'POST'])]
+    public function listeIDCocher(ComposeRepository $composeRepository, Liste $liste, Request $request): Response
+    {
+        $article = $request->get('idArticle');
+        $listeQ = $request->get('idListe');
+        $checkBox = $request->get('estMarque');
+        $quantite = $request->get('quantite');
+        if($checkBox == 'on'){
+            $checkBox = 0;
+        } else {
+            $checkBox = 1;
+        }
+
+        $post = $composeRepository->findOneBy(['idListe' => $listeQ, 'idArticle' => $article, 'quantite' => $quantite]);
+
+        if (!$composeRepository) {
+            return $this->redirectToRoute('app_user_liste_id',
+                ['id' => $liste->getId(),
+                'error' => 'assoNotFound'
+            ],
+                Response::HTTP_SEE_OTHER);
+        }
+
+        $post->setEstMarque($checkBox);
+     
+        $composeRepository->save($post, true);
         
         return $this->redirectToRoute('app_user_liste_id',
             ['id' => $liste->getId()],
