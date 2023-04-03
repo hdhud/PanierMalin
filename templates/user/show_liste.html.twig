@@ -39,6 +39,7 @@
                 <div class="article item_liste">
                     <div class="article_quantite">{{ article.quantite }}</div>
                     <div class="article_nom">{{ article.idArticle.nomArticle }}</div>
+                    <input type="checkbox" name="checkboxAchete" id="checkboxAchete" {% if article.estMarque %}checked{% endif %}>
                     <button class="supprimerarticle">-</button>
                     <div class="article_prix">{{ article.quantite * article.idArticle.prix }}</div>
                     <br>
