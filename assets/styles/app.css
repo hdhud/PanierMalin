@@ -15,6 +15,7 @@ h1{
 
 body {
     background-color: rgb(255, 255, 255);
+    font-family: 'Helvetica 55 Roman', sans-serif;
 }
 
 body::-webkit-scrollbar {
@@ -874,4 +875,52 @@ input::placeholder {
     padding: 5px;
     text-decoration: none;
     color: #FFFFFF;
+}
+
+.pagearticle {
+    font-family: 'Helvetica 55 Roman', sans-serif;
+}
+
+
+.pagetypearticle, .pageindextypearticle {
+    font-family: 'Helvetica 55 Roman', sans-serif;
+}
+
+#addArticleContainerCRUD{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 24rem;
+    margin-bottom: 1rem;
+    border: 3px solid black;
+}
+
+#addArticleContainerCRUD h2{
+    background-color: black;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    color: white;
+    text-align: center;
+    font-size:30px;
+    padding: 0 0 3px 0;
+}
+
+.containerCRUD{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#addArticleContainerCRUD #article{
+    flex-direction: column;
+}
+
+#addArticleContainerCRUD #article>div{
+    display: flex;
+    width:23rem;
+    justify-content: space-between;
+}
+
+#addArticleContainerCRUD button{
+    margin-bottom: 1rem;
 }
