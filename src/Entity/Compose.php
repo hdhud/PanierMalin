@@ -86,6 +86,11 @@ class Compose
         return $this->idArticle->getPrix();
     }
 
+    public function getNom(): ?string
+    {
+        return $this->idArticle->getNomArticle();
+    }
+
     /**
      * @return Collection<int, TypeArticle>
      */

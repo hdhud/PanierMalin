@@ -87,7 +87,13 @@
             <h1>Collaborateurs</h1>
             <div id="listeCollab">
                 {% for collaborateur in collaborateurs %}
-                    {{ collaborateur }}
+                    <div id="ligneCollab">
+                        <span>{{ collaborateur }}</span>
+                        <form action="{{ path('app_user_liste_id_supprimer_collab', {'id': liste.id}) }}" method="get" class="supprCollab">
+                            <input class="form-collab"type="text" name="pseudo" value="{{collaborateur}}" hidden>
+                            <button id="moinsCollab"type="submit"></button>
+                        </form>
+                    </div>
                     <br>
                 {% endfor %} 
             </div>

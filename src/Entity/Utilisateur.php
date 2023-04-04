@@ -218,6 +218,22 @@ class Utilisateur
         return $prixMax;
     }
 
+    public function getNomPrixMaxArticleParListe(): string
+    {
+        $prixMax = 0;
+        $nomArticle = '';
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                if ($article->getPrix() > $prixMax) {
+                    $prixMax = $article->getPrix();
+                    $nomArticle = $article->getNom();
+                }
+            }
+        }
+
+        return $nomArticle;
+    }
+
     public function getPrixMinArticleParListe(): float
     {
         $prixMin = $this->getPrixMaxArticleParListe();
@@ -230,6 +246,22 @@ class Utilisateur
         }
 
         return $prixMin;
+    }
+
+    public function getNomPrixMinArticleParListe(): string
+    {
+        $prixMin = $this->getPrixMaxArticleParListe();
+        $nomArticle = '';
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                if ($article->getPrix() < $prixMin) {
+                    $prixMin = $article->getPrix();
+                    $nomArticle = $article->getNom();
+                }
+            }
+        }
+
+        return $nomArticle;
     }
 
     public function getPrixParTypeArticle(): array
