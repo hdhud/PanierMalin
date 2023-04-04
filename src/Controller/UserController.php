@@ -152,6 +152,37 @@ class UserController extends AbstractController
             Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/liste/{id}/supprimerCollab', name: 'app_user_liste_id_supprimer_collab', methods: ['GET', 'POST'])]
+    public function listeIDSupprimerCollab(UtilisateurRepository $utilisateurRepository, ListeRepository $listeRepository, Liste $liste, Request $request): Response
+    {
+        $pseudo = $request->get('pseudo');
+
+        $user = $utilisateurRepository->findOneBy(['pseudo' => $pseudo]);
+
+        if (!$user) {
+            return $this->redirectToRoute('app_user_liste_id',
+                ['id' => $liste->getId(),
+                'error' => 'userNotFound'
+            ],
+                Response::HTTP_SEE_OTHER);
+        }
+
+        if (!$liste->getCreePar()->contains($user)) {
+            return $this->redirectToRoute('app_user_liste_id',
+                ['id' => $liste->getId(),
+                'error' => 'notCollaborator'
+            ],
+                Response::HTTP_SEE_OTHER);
+        }
+        $liste->removeCreePar($user);
+     
+        $listeRepository->save($liste, true);
+        
+        return $this->redirectToRoute('app_user_liste_id',
+            ['id' => $liste->getId()],
+            Response::HTTP_SEE_OTHER);
+    }
+
 
     #[Route('/liste/{id}/cocher', name: 'app_user_liste_id_cocher', methods: ['GET', 'POST'])]
     public function listeIDCocher(ComposeRepository $composeRepository, Liste $liste, Request $request): Response
