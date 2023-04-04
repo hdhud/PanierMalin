@@ -3,35 +3,32 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
+    <div class="pageshowlist">
+        <h1>Article</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NomArticle</th>
-                <th>Prix</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.nomArticle }}</td>
-                <td>{{ article.prix }}</td>
-                <td>
-                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="pagearticle">
+            <div class="descarticle">
+                <div>Id</div>
+                <div>NomArticle</div>
+                <div>Prix</div>
+                <div>actions</div>
+            </div>
+            <div class="toutarticle">
+            {% for article in articles %}
+                <div class="indexarticle">
+                    <div class="idarticle">{{ article.id }}</div>
+                    <div class="nomarticle">{{ article.nomArticle }}</div>
+                    <div class="prixarticle">{{ article.prix }}</div>
+                    <div><a href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a></div>
+                </div>
+            {% else %}
+                <div>
+                    <div colspan="4">no records found</div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
 
-    <a href="{{ path('app_article_new') }}">Create new</a>
+        <a href="{{ path('app_article_new') }}" class="btn-newarticle"><button>Créer un Article</button></a>
+    </div>
 {% endblock %}

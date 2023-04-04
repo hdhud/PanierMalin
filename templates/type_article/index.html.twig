@@ -3,33 +3,29 @@
 {% block title %}TypeArticle index{% endblock %}
 
 {% block body %}
-    <h1>TypeArticle index</h1>
+    <div class="pageindextypearticle">
+    <h1>TypeArticle</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NomType</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="typearticleliste">
+        <div class="desctypearticle">
+            <div>Id</div>
+            <div>NomType</div>
+            <div>actions</div>
+        </div>
+        <div class="touttypearticle">
         {% for type_article in type_articles %}
-            <tr>
-                <td>{{ type_article.id }}</td>
-                <td>{{ type_article.nomType }}</td>
-                <td>
-                    <a href="{{ path('app_type_article_show', {'id': type_article.id}) }}">show</a>
-                    <a href="{{ path('app_type_article_edit', {'id': type_article.id}) }}">edit</a>
-                </td>
-            </tr>
+            <div class="typearticle">
+                <div>{{ type_article.id }}</div>
+                <div>{{ type_article.nomType }}</div>
+                <div><a href="{{ path('app_type_article_edit', {'id': type_article.id}) }}">Modifier</a></div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+            <div>
+                <div colspan="3">no records found</div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    </div>
 
-    <a href="{{ path('app_type_article_new') }}">Create new</a>
+    <a href="{{ path('app_type_article_new') }}" class="btn-newtypearticle"><button>Créer un Type</button></a>
 {% endblock %}

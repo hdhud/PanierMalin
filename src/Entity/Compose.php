@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ComposeRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ComposeRepository::class)]
@@ -80,9 +81,16 @@ class Compose
         return $this;
     }
 
-    // Get the price of the article
     public function getPrix(): ?float
     {
         return $this->idArticle->getPrix();
+    }
+
+    /**
+     * @return Collection<int, TypeArticle>
+     */
+    public function getType(): Collection
+    {
+        return $this->idArticle->getType();
     }
 }

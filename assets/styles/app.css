@@ -49,11 +49,11 @@ body::-webkit-scrollbar {
 }
 
 .form-collab{
-    height: 4rem;
+    height: 2.5rem;
     font-family: 'Helvetica 55 Roman', sans-serif;
-    width:22rem;
+    width:15rem;
     background-color: rgb(255, 255, 255);
-    font-size: 3rem;
+    font-size: 20px;
     margin-top:10px;
     text-align: center;
     border: 3px solid black;
@@ -272,11 +272,11 @@ input::placeholder {
     text-align: center;
     height: calc(90vh - 100px - 10rem - 12px);
 }
-.backliste{
+.backliste,.btn-newarticle,.btn-newtypearticle{
     color:rgb(0, 0, 0)
 }
 
-#backliste button {
+#backliste button,.btn-newarticle button,.btn-newtypearticle button {
     border: 3px solid black;
     height: 2.5rem;
     font-size: 20px;
@@ -288,8 +288,13 @@ input::placeholder {
     margin-top: 10px;
     transition: 0.3s ease;
 }
-
-#backliste button:hover{
+.btn-newarticle,.btn-newtypearticle{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: center;
+}
+#backliste button:hover,.btn-newarticle button:hover,.btn-newtypearticle button:hover{
     background-color: black;
     color: white;
     transition: 0.3s ease;
@@ -315,7 +320,7 @@ input::placeholder {
 
 
 }
-.pageshowlist{
+.pageshowlist,.pageindextypearticle{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -359,18 +364,18 @@ input::placeholder {
     align-items: center;
     text-align: center;
     color:black;
-    height:5vh;
-    width: 8vw;
+    height:3rem;
+    width: 4rem;
     font-size: 1rem;
 }
 .article_nom{
     display: flex;
     justify-content: start;
     align-items: center;
-    text-align: center;
+    text-align: left;
     color:black;
-    height:5vh;
-    width: 20vw;
+    height:3rem;
+    width: 20rem;
     font-size: 1rem;
 }
 .article_prix,.defprix{
@@ -379,8 +384,8 @@ input::placeholder {
     align-items: center;
     text-align: center;
     color:black;
-    height:5vh;
-    width: 8vw;
+    height:3rem;
+    width: 4rem;
     font-size: 1rem;
 }
 .supprimerarticle{
@@ -390,10 +395,20 @@ input::placeholder {
     text-align: center;
     background-color: black;
     color:white;
-    height:3vh;
-    width: 2vw;
+    border: none;
+    height:1.8rem;
+    position: relative;
+    left: 6rem;
+    width:2rem;
     font-size: 1rem;
     font-weight: 900;
+    transition: 0.3s ease;
+}
+
+.supprimerarticle:hover{
+    transition: 0.3s ease;
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .infosTicket{
@@ -406,8 +421,8 @@ input::placeholder {
     align-items: center;
     text-align: center;
     color:black;
-    height:5vh;
-    width: 21.9vw;
+    height:3rem;
+    width: 22rem;
     font-size: 1rem;
 }
 .finticket{
@@ -416,6 +431,9 @@ input::placeholder {
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    margin-left: 10px;
+    flex-direction: row;
+
 }
 
 .finticket span{
@@ -611,7 +629,7 @@ input::placeholder {
     justify-content: center;
     height: 100%;
     margin-bottom: 1rem;
-    width:30rem;
+    width:24rem;
     border: 3px solid black;
 }
 
@@ -630,13 +648,15 @@ input::placeholder {
     color:white;
     background-color: #000000;
     width: 100%;
+    font-size: 30px;
     text-align: center;
+    padding: 0 0 3px 0;
 }
 
 .collaborateur>h2{
     font-family: 'Helvetica 55 Roman', sans-serif;
     width: 100%;
-    font-size: 2rem;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -705,7 +725,7 @@ input::placeholder {
     font-size: 50px;
     position: relative;
     display: inline-block;
-    animation: move 20s infinite linear;
+    animation: move 25s infinite linear;
     color: #FFFFFF;
     align-self: center;
 }
@@ -715,6 +735,111 @@ input::placeholder {
         left: 800px;
     }
     to {
-        left: -4800px;
+        /* À changer si plus de types */
+        left: -6800px;
     }
+}
+
+
+.error{
+    color: red;
+    font-size: 1.5rem;
+    font-family: 'Helvetica 55 Roman', sans-serif;
+    font-weight: bolder;
+    margin-top: 10px;
+}
+
+#checkboxAchete{
+    width: 3rem;
+    height: 3rem;
+    background-color: #ffffff00;
+    margin: 10px;
+    position: relative;
+    bottom: -1.6rem;
+}
+
+#checkboxAchete:hover{
+    cursor: pointer;
+}
+
+#checkboxAchete:checked{
+    accent-color: black;
+}
+
+
+.btnCheck{
+    width: 3rem;
+    height: 3rem;
+    top: -2rem;
+    position: relative;
+    opacity: 0;
+}
+
+.btnCheck:hover{
+    cursor: pointer;
+}
+.admin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    margin-bottom: 1rem;
+    width:100%;
+    color:#FFFFFF;
+    text-decoration: none;
+    background-color: #000000;
+}
+.admin a {
+    font-size: 2em;
+    color:#FFFFFF;
+    text-decoration: none;
+}
+.pagearticle,.typearticleliste{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-bottom: 1rem;
+    width:60vw;
+    color:#FFFFFF;
+    text-decoration: none;
+    background-color: #737373;
+    border: #000000 3px solid;
+}
+.descarticle,.desctypearticle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-bottom: 1rem;
+    width:60vw;
+    color:#FFFFFF;
+    text-decoration: none;
+    background-color: #000000;
+}
+.descarticle div,.desctypearticle div{
+    width: 15vw;
+    text-align: center;
+    padding: 10px;
+}
+.indexarticle,.typearticle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-bottom: 1rem;
+    width:60vw;
+    color:#FFFFFF;
+    text-decoration: none;
+}
+.indexarticle div,.typearticle div{
+    width: 15vw;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    color: #FFFFFF;
 }

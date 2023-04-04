@@ -35,20 +35,26 @@
                     <div class="defprix">PRIX</div>
                     <br>
                 </div>
+
                 {% for article in liste.composes %}
+            
+
                 <div class="article item_liste">
                     <div class="article_quantite">{{ article.quantite }}</div>
                     <div class="article_nom">{{ article.idArticle.nomArticle }}</div>
-                    <div class="moinsBouton">
-                        <form method="post" action="{{ path('app_compose_delete', {'id': article.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette article ?');">
+
+                    <form action="{{ path('app_user_liste_id_cocher', {'id': liste.id}) }}" method="get">
+                        <input type="checkbox" name="estMarque" id="checkboxAchete" {% if article.estMarque %}checked{% endif %}>
+                        <input type="hidden" name="idArticle" value="{{article.idArticle.id}}">
+                        <input type="hidden" name="idListe" value="{{liste.id}}">
+                        <input type="hidden" name="quantite" value="{{article.quantite}}">
+                        <button type="submit" class="btnCheck">yipi</button>
+                    </form>
+
+                    <form method="post" action="{{ path('app_compose_delete', {'id': article.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
-                            <button class="delete-btn-moins"></button>
-                        </form>
-                        <form method="post" action="{{ path('app_compose_delete', {'id': article.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette article ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
-                            <button class="delete-btn"></button>
-                        </form>
-                    </div>
+                            <button class="supprimerarticle">-</button>
+                    </form>
                     <div class="article_prix">{{ article.quantite * article.idArticle.prix }}</div>
                     <br>
                 </div>

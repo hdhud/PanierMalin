@@ -18,7 +18,12 @@
             <div class="table center">
                 <div class="monitor-wrapper center">
                     <div class="monitor center">
-                    <p>Nombre d'articles : <font color="FF0000">{{ user.getNumberOfArticles }}</font>, Prix total : <font color="FF0000">{{ user.getPrixTotal }}</font> €, Prix moyen des articles : <font color="FF0000">{{ user.getPrixMoyenArticleParListe }} </font>€, Prix de l'article le plus cher : <font color="FF0000">{{ user.getPrixMaxArticleParListe }} </font>€, Prix de l'article le moins cher : <font color="FF0000">{{ user.getPrixMinArticleParListe }} </font>€</p>
+                    <p>Nombre d'articles : <font color="FF0000">{{ user.getNumberOfArticles }}</font>, Prix total : <font color="FF0000">{{ user.getPrixTotal }}</font> €, Prix moyen des articles : <font color="FF0000">{{ user.getPrixMoyenArticleParListe }} </font>€, Prix de l'article le plus cher : <font color="FF0000">{{ user.getPrixMaxArticleParListe }} </font>€, Prix de l'article le moins cher : <font color="FF0000">{{ user.getPrixMinArticleParListe }} </font>€, 
+                    {% for key, value in user.getPrixParTypeArticle %}
+                        Prix pour type {{ key }} : <font color="FF0000">{{ value }}</font> €{% if loop.last == false %},{% else %}.
+                        {% endif %}
+                    {% endfor %}
+                    </p>
                     </div>
                 </div>
             </div>
