@@ -9,16 +9,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ArticleRepository $articleRepository, SessionInterface $session): Response
     {
-        return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
-        ]);
+        $pseudo = $session->get('pseudo');
+        if ($pseudo == 'admin') {
+            return $this->render('article/index.html.twig', [
+                'articles' => $articleRepository->findAll(),
+            ]);
+        } else {
+            return $this->redirectToRoute('app_accueil');
+        }
     }
 
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
