@@ -26,6 +26,11 @@ class TypeArticle
         $this->articles = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->nomType;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

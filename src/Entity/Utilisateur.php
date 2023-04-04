@@ -228,6 +228,23 @@ class Utilisateur
         return $prixMin;
     }
 
+    public function getPrixParTypeArticle(): array
+    {
+        $prixParTypeArticle = [];
+        foreach ($this->listes as $liste) {
+            foreach ($liste->getArticlesComposes() as $article) {
+                foreach($article->getType() as $type) {
+                    if (!array_key_exists($type->getNomType(), $prixParTypeArticle)) {
+                        $prixParTypeArticle[$type->getNomType()] = 0;
+                    }
+                    $prixParTypeArticle[$type->getNomType()] += $article->getPrix() * $article->getQuantite();
+                }
+            }
+        }
+
+        return $prixParTypeArticle;
+    }
+
     public function getListesOrderByMostRecent(): Collection
     {
         $listes = $this->listes->toArray();

@@ -720,7 +720,7 @@ input::placeholder {
     font-size: 50px;
     position: relative;
     display: inline-block;
-    animation: move 20s infinite linear;
+    animation: move 25s infinite linear;
     color: #FFFFFF;
     align-self: center;
 }
@@ -730,7 +730,8 @@ input::placeholder {
         left: 800px;
     }
     to {
-        left: -4800px;
+        /* À changer si plus de types */
+        left: -6800px;
     }
 }
 
