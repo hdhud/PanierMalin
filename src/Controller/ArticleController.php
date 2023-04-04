@@ -17,7 +17,7 @@ class ArticleController extends AbstractController
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository, SessionInterface $session): Response
     {
-        $pseudo = $session->get('pseudo');
+        $pseudo = $session->get('Minh');
         if ($pseudo == 'admin') {
             return $this->render('article/index.html.twig', [
                 'articles' => $articleRepository->findAll(),
