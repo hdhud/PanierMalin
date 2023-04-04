@@ -40,11 +40,11 @@
                     <div class="article_quantite">{{ article.quantite }}</div>
                     <div class="article_nom">{{ article.idArticle.nomArticle }}</div>
                     <div class="moinsBouton">
-                        <form method="post" action="{{ path('app_compose_delete', {'id': article.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                        <form method="post" action="{{ path('app_compose_delete', {'id': article.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette article ?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
                             <button class="delete-btn-moins"></button>
                         </form>
-                        <form method="post" action="{{ path('app_compose_delete', {'id': article.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                        <form method="post" action="{{ path('app_compose_delete', {'id': article.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette article ?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
                             <button class="delete-btn"></button>
                         </form>

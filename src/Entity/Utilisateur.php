@@ -36,6 +36,10 @@ class Utilisateur
     {
         return $this->id;
     }
+    public function getUtilisateurType(int $id): self
+    {
+        return $this->UtilisateurType;
+    }
 
     public function getPseudo(): ?string
     {
