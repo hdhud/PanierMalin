@@ -34,6 +34,7 @@
                     {{ form_row(form.estMarque) }}
                     <button type="submit">{{button_label|default("Ajouter")}}</button>
                 {{ form_widget(form) }}
+                {{ form_end(form) }}
             </div>
         </div>
 
@@ -52,7 +53,11 @@
             <div class="article item_liste">
                 <div class="article_quantite">{{ article.quantite }}</div>
                 <div class="article_nom">{{ article.idArticle.nomArticle }}</div>
-                <button class="supprimerarticle">-</button>
+                <form method="post" action="{{ path('app_compose_delete', {'id': article.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette liste ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+                    <input type="hidden" name="page" value="liste_articles">
+                    <button class="supprimerarticle">-</button>
+                </form>
                 <div class="article_prix">{{ article.quantite * article.idArticle.prix }}</div>
                 <br>
             </div>

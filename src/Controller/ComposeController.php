@@ -74,6 +74,10 @@ class ComposeController extends AbstractController
             $composeRepository->remove($compose, true);
         }
 
+        if($request->request->get('page') == 'liste_articles'){
+            return $this->redirectToRoute('app_user_liste_articles', [], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->redirectToRoute('app_user_liste_id', ['id'=>$id], Response::HTTP_SEE_OTHER);
     }
 }
