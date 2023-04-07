@@ -90,8 +90,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/liste/{id}', name: 'app_user_liste_id')]
-    public function listeID(Liste $liste, SessionInterface $session, Request $request, ComposeRepository $composeRepository): Response
+    public function listeID($id, SessionInterface $session, Request $request, ComposeRepository $composeRepository, ListeRepository $listeRepository): Response
     {
+        $liste = $listeRepository->findOneBy(['id' => $id]);
+
+        if (!$liste) {
+            return $this->redirectToRoute('app_user_liste');
+        }
+
         $userCreeListe = $liste->getCreePar()->first(); // récupère le premier utilisateur qui a créé la liste
         $currentUserPseudo = $session->get('pseudo'); // récupère le pseudo de l'utilisateur connecté
 
@@ -100,7 +106,6 @@ class UserController extends AbstractController
         $form = $this->createForm(AddArticleType::class, $compose);
         $form->handleRequest($request);
 
-        
         if ($form->isSubmitted() && $form->isValid()) {
             $compose->setIdListe($liste);
             $composeRepository->save($compose, true);
@@ -117,9 +122,10 @@ class UserController extends AbstractController
                 ]);
             }
         }
+
         return $this->redirectToRoute('app_user_liste');
-        
     }
+
     
     #[Route('/liste/{id}/collaborer', name: 'app_user_liste_id_collaborer', methods: ['GET', 'POST'])]
     public function listeIDCollaborer(UtilisateurRepository $utilisateurRepository, ListeRepository $listeRepository, Liste $liste, Request $request): Response
